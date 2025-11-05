@@ -1,0 +1,1404 @@
+{
+	"info": {
+		"_postman_id": "779e81ce-0252-4b3b-b2fc-684a874cc9aa",
+		"name": "tp2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48183743",
+		"_collection_link": "https://samuelrobillard-2853912.postman.co/workspace/samuelrobillard's-Workspace~928d3be3-de87-4855-8222-057119c71543/collection/48183743-779e81ce-0252-4b3b-b2fc-684a874cc9aa?action=share&source=collection_link&creator=48183743"
+	},
+	"item": [
+		{
+			"name": "loginUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let data = pm.response.json();\r",
+							"pm.collectionVariables.set(\"user\", data.accessToken); // ⚡ variable de collection\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \r\n    \"email\" : \"allo@gmail.com\",\r\n    \"password\": \"alloallo\"\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loginAdmin",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"let data = pm.response.json();\r",
+							"pm.collectionVariables.set(\"admin\", data.accessToken); // ⚡ variable de collection\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\": \"adminadmin\"\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUserImAdmin",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{admin}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/users/68f00b7f663a537ee667bb56",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"users",
+						"68f00b7f663a537ee667bb56"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllMovie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/Movie",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"Movie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllAMovieFilter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/Movie?title=&genre=&minYear=2000&maxDur=&page=&limit=3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"Movie"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": ""
+						},
+						{
+							"key": "genre",
+							"value": ""
+						},
+						{
+							"key": "minYear",
+							"value": "2000"
+						},
+						{
+							"key": "maxDur",
+							"value": ""
+						},
+						{
+							"key": "page",
+							"value": ""
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllSerie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/series",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"series"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSerieFilter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/series?status=ended",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"series"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "serie ahh serie",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "ended"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllSeason",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/season",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"season"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllEpisode",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/episode",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"episode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllRating",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/ratings",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"ratings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllRatingOfMovieAverage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/ratings/avg/movie/68efc1e001cb1f5b65853faa",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"ratings",
+						"avg",
+						"movie",
+						"68efc1e001cb1f5b65853faa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllRatingOfSerieAverage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/ratings/avg/serie/68efc5597e60108c63766ff9",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"ratings",
+						"avg",
+						"serie",
+						"68efc5597e60108c63766ff9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMe",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"user\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/me",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRecoMovie",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{user}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/reco/movie?genre=drama",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"reco",
+						"movie"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "drama"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{admin}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \"username\": \"test\",\r\n    \"nom\" : \"sam\",\r\n    \"email\" : \"test4e3@gmail.com\",\r\n    \"password\": \"Alloallo1#\",\r\n    \"role\": \"user\",\r\n    \"favorites\" : []\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMovie",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let data = pm.response.json();\r",
+							"pm.collectionVariables.set(\"movieId\", data.movie._id); // ⚡ variable de collection\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{admin}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \"title\": \"1\",\r\n    \"genre\" : [\"drama, horror\"],\r\n    \"releaseDate\": \"2-4-2000\",\r\n    \"durationMin\": 300,\r\n    \"synopsis\" : \"sdf\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/movie",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"movie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createSerie",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \"title\": \"serie ahh serie\",\r\n    \"genre\" : [\"drama0\"],\r\n    \"status\": \"ended\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/serie",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"serie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createSeason",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{admin}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \"seasonNo\" : 1,\r\n    \"episodes\" : 12,\r\n    \"serieId\": \"68efc5597e60108c63766ff9\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/season",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"season"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createSeasonWithSerieid",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \"seasonNo\" : 1,\r\n    \"episodes\" : 12\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/series/68efc5597e60108c63766ff9/seasons",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"series",
+						"68efc5597e60108c63766ff9",
+						"seasons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createEpisodewithId",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n \r\n    \"epNo\" : 1,\r\n    \"title\": \"mon ri3bb\",\r\n    \"durationMin\": 200\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/series/68efc5597e60108c63766ff9/seasons/68efc9ad1527b4772b528b19/episodes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"series",
+						"68efc5597e60108c63766ff9",
+						"seasons",
+						"68efc9ad1527b4772b528b19",
+						"episodes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createEpisode",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \"seasonId\" : \"68efc9ad1527b4772b528b19\",\r\n    \"epNo\" : 1,\r\n    \"serieId\": \"68efe40b0235d7a624bf3bbc\",\r\n    \"title\": \"mon ri3bb\",\r\n    \"durationMin\": 200\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/episode",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"episode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createRating",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"user\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n   \r\n    \"target\" : \"episode\",\r\n    \"targetId\": \"68efcfdabb5e966085b05a45\",\r\n    \"score\": 8,\r\n    \"review\": \"trop cool\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/rating",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"rating"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyMe",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"user\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"user\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"username\": \"teoeoeo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/me",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyMovie",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{admin}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"title\": \"teoeoeo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/movie/{{movieId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"movie",
+						"{{movieId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMovie Copy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Récupérer le token existant\r",
+							"let token = pm.collectionVariables.get(\"admin\");\r",
+							"\r",
+							"if (!token) {\r",
+							"    // Si pas de token, on ne peut pas attendre le login dans Pre-request Script\r",
+							"    console.log(\"No admin token found! Run the login request first.\");\r",
+							"} else {\r",
+							"    // Token déjà présent, on l'ajoute au header\r",
+							"    pm.request.headers.add({\r",
+							"        key: \"Authorization\",\r",
+							"        value: `Bearer ${token}`\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"title\": \"teoeoeo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v2/movie/{{movieId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"movie",
+						"{{movieId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.collectionVariables.set(\"baseUrl\", \"http://localhost:3000\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "admin",
+			"value": ""
+		},
+		{
+			"key": "baseUrl",
+			"value": ""
+		},
+		{
+			"key": "user",
+			"value": ""
+		},
+		{
+			"key": "movieId",
+			"value": ""
+		}
+	]
+}

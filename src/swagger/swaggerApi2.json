@@ -1,0 +1,532 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Movie",
+    "version": "2.0.0",
+    "description": "API RESTful pour la gestion des utilisateurs, des films  et l’authentification sécurisée"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v2"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Lister les utilisateurs",
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Liste des utilisateurs"
+          }
+        }
+      },
+      "post": {
+        "summary": "Créer un nouvel utilisateur",
+        "tags": ["Users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Utilisateur créé"
+          },
+          "400": {
+            "description": "Erreur de requête"
+          }
+        }
+      }
+    },
+
+    "/login": {
+      "post": {
+        "summary": "Authentifier un utilisateur",
+        "tags": ["Users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authentification réussie"
+          },
+          "401": {
+            "description": "Échec de l'authentification"
+          }
+        }
+      }
+    },
+
+  "/me": {
+        "get": {
+          "summary": " afficher l'utilisateur connecté",
+          "tags": ["Users"],
+          
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "affiche utilisateur connecté"
+            }
+          }
+        },
+        "patch": {
+          "summary": "Mettre à jour les informations de l'utilisateur connecté",
+          "tags": ["Users"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserUpdate"
+                }
+              }
+            }
+          }
+      }
+  },
+
+    "/movie": {
+      "get": {
+        "summary": "Lister les films",
+        "tags": ["Movies"],
+        "responses": {
+          "200": {
+            "description": "Liste des films"
+          },
+          "401": {
+            "description": "Non autorisé"
+          }
+        }
+      },
+      "post": {
+        "summary": "Créer un film",
+        "tags": ["Movies"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovieCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Film créé"
+          },
+          "400": {
+            "description": "Requête invalide"
+          }
+        }
+      }
+    },
+    
+  "/movie/{id}": {
+      "delete": {
+        "summary": "Supprimer un film",
+        "tags": ["Movies"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "L'identifiant unique du film à supprimer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Film supprimé avec succès"
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "401": {
+            "description": "Non autorisé"
+          },
+          "404": {
+            "description": "Film non trouvé"
+          },
+          "500": {
+            "description": "Erreur interne du serveur"
+          }
+        }
+      }
+    },
+
+
+  "/series": {
+      "get": {
+        "summary": "Lister les series",
+        "tags": ["series"],
+        "responses": {
+          "200": {
+            "description": "Liste des series"
+          }
+        }
+      },
+      "post": {
+        "summary": "Créer une nouvelle serie",
+        "tags": ["series"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SerieCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "serie créé"
+          },
+          "400": {
+            "description": "Erreur de requête"
+          }
+        }
+      }
+    },
+
+    "/series/{id}": {
+      "delete": {
+        "summary": "Supprimer une série",
+        "tags": ["series"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "L'identifiant unique de la série à supprimer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Série supprimée avec succès"
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "401": {
+            "description": "Non autorisé"
+          },
+          "404": {
+            "description": "Série non trouvée"
+          },
+          "500": {
+            "description": "Erreur interne du serveur"
+          }
+        }
+      }
+    },
+
+
+  "/season": {
+    "get": {
+      "summary": "Lister les seasons",
+      "tags": ["Season"],
+      "responses": {
+        "200": {
+          "description": "Liste des seasons"
+        }
+      }
+    },
+    "post": {
+      "summary": "Créer une nouvelle season",
+      "tags": ["Season"],
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SeasonCreate"
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "Season créé"
+        },
+        "400": {
+          "description": "Erreur de requête"
+        }
+      }
+    }
+  },
+  "/season/{id}": {
+    "delete": {
+      "summary": "Supprimer une season",
+      "tags": ["Season"],
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "L'identifiant unique de la season à supprimer"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Season supprimée avec succès"
+        },
+        "400": {
+          "description": "Requête invalide"
+        },
+        "401": {
+          "description": "Non autorisé"
+        },
+        "404": {
+          "description": "Season non trouvée"
+        },
+        "500": {
+          "description": "Erreur interne du serveur"
+        }
+      }
+    }
+  },
+
+"/episode": {
+    "get": {
+      "summary": "Lister les episodes",
+      "tags": ["episodes"],
+      
+      "responses": {
+        "200": {
+          "description": "Liste des episodes"
+        }
+      }
+    },
+    "post": {
+      "summary": "Créer une novelle episode",
+      "tags": ["episodes"],
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/EpisodeCreate"
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "episode créé"
+        },
+        "400": {
+          "description": "Erreur de requête"
+        }
+      }
+    }
+  },
+  "/ratings": {
+    "get": {
+      "summary": "Lister les ratings",
+      "tags": ["ratings"],
+      
+      "responses": {
+        "200": {
+          "description": "Liste des ratings"
+        }
+      }
+    },
+    "post": {
+      "summary": "Créer un nouveau rating",
+      "tags": ["ratings"],
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/RatingCreate"
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "rating créé"
+        },
+        "400": {
+          "description": "Erreur de requête"
+        }
+      }
+    }
+  }
+
+
+
+
+},
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+
+    "schemas": {
+      "UserCreate": {
+        "type": "object",
+        "properties": {
+          "nom": { "type": "string", "example": "bob" },
+          "username": { "type": "string", "example": "alice42" },
+          "email": { "type": "string", "format": "email" },
+          "password": { "type": "string", "minLength": 6, "example" : "password1!"},
+          "role": { "type": "string", "example": "user" },
+          "favorites": { "type": "string", "example": "64kw132ksk" }
+        },
+        "required": ["nom", "username", "email", "password", "role" , "favorites"]
+      },
+      "UserLogin": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string", "format": "email" },
+          "password": { "type": "string" }
+        },
+        "required": ["email", "password"]
+      },
+      "UserUpdate": {
+        "type": "object",
+        "properties": {
+          "username": { "type": "string", "example": "alice42" },
+          "email": { "type": "string", "format": "email" },
+          "password": { "type": "string", "minLength": 6 , "example" : "password1!" }
+        }
+      
+      },
+      "MovieCreate": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string", "example": "Inception" },
+          "genre": { "type": "string", "example": "Sci-Fi" },
+          "durationMin": { "type": "integer", "example": 148 },
+          "synopsis": { "type": "string", "example": "A thief who steals corporate secrets through dream-sharing..." }
+        },
+        "required": ["title", "genre", "durationMin", "synopsis"]
+      },
+      "SeasonCreate": {
+        "type": "object",
+        "properties": {
+          "seasonNo": { "type": "integer", "example": 1 },
+          "episodes": { "type": "integer", "example": 12 },
+          "serieId": { "type": "string", "example": "68efc5597e60108c63766ff9" }
+        },
+        "required": ["seasonNo", "episodes", "serieId"]
+      },
+      "SerieCreate": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string", "example": "Serie cool" },
+          "genre": { "type": "string", "example": "drama" },
+          "status": { "type": "string", "example": "ended" }
+        },
+        "required": ["title", "genre", "status"]
+      },
+      "RatingCreate": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "example": "episode" },
+          "targetId": { "type": "string", "example": "68efcfdabb5e966085b05a45" },
+          "score": { "type": "integer", "example": 8 },
+          "review": { "type": "string", "example": "Trop bien" }
+        },
+        "required": ["target", "targetId", "score", "review"]
+      },
+      "EpisodeCreate": {
+        "type": "object",
+        "properties": {
+          "seasonId": { "type": "string", "example": "68efc9ad1527b4772b528b19" },
+          "epNo": { "type": "integer", "example": 1 },
+          "title": { "type": "string", "example": "La guerre des thrones" },
+          "durationMin": { "type": "integer", "example": 200 }
+        },
+        "required": ["seasonId", "epNo", "title", "duratioMin"]
+      }
+
+      
+    }
+    
+  }
+}

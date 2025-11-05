@@ -1,0 +1,540 @@
+{
+	"info": {
+		"_postman_id": "c985703f-308b-4344-a6cb-3d0baa8dc3c4",
+		"name": "tp1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48183743",
+		"_collection_link": "https://samuelrobillard-2853912.postman.co/workspace/samuelrobillard's-Workspace~928d3be3-de87-4855-8222-057119c71543/collection/48183743-c985703f-308b-4344-a6cb-3d0baa8dc3c4?action=share&source=collection_link&creator=48183743"
+	},
+	"item": [
+		{
+			"name": "getAllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUsersMedia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/7/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"7",
+						"medias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createUsers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \"username\": \"John Does\",\r\n    \"email\" : \"zfsdg@gmail.com\",\r\n    \"password\": \"pass\",\r\n    \"role\": \"user\",\r\n    \"favorites\" : [\"3\",\"5\",\"7\"]\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n   \r\n    \"email\" : \"asasd@gmail.com\",\r\n    \"password\": \"pass\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteMedia",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/medias/4",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEpisodes",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/episode/3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"episode",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteSaisons",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/saison/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"saison",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllMedia",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \"username\": \"John Doe\",\r\n    \"email\" : \"asasd@gmail.com\",\r\n    \"password\": \"pass\"\r\n  }"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllEpisode",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \"username\": \"John Doe\",\r\n    \"email\" : \"asasd@gmail.com\",\r\n    \"password\": \"pass\"\r\n  }"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/episodes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"episodes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllSaisons",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n    \"username\": \"John Doe\",\r\n    \"email\" : \"asasd@gmail.com\",\r\n    \"password\": \"pass\"\r\n  }"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/saisons",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"saisons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMediaFilm",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n      \r\n        \"type\" : \"film\",\r\n        \"titre\": \"É\",\r\n        \"genre\": \"adÉ\",\r\n        \"year\": 2,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"watched\": true\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMediaFilmTitreManquant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n      \r\n        \"type\" : \"film\",\r\n        \"genre\": \"adÉ\",\r\n        \"year\": 2,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"watched\": true\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMediaFilmTitreNonValide",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n      \r\n        \"type\" : \"film\",\r\n        \"titre\" : \"ads/#\",\r\n        \"genre\": \"adÉ\",\r\n        \"year\": 2,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"watched\": true\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMediaFilmDateFuture",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n      \r\n        \"type\" : \"film\",\r\n        \"titre\" : \"ads\",\r\n        \"genre\": \"adÉ\",\r\n        \"year\": 200005,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"watched\": true\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMediaSerie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \r\n      \r\n        \r\n        \"type\" : \"serie\",\r\n        \"titre\": \"aaaa111222sss\",\r\n        \"genre\": \"drama\",\r\n        \"year\": 2020,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"status\" : \"en_attente\",\r\n        \"saisonsId\" : [ \"2\", \"3\"\r\n          ]\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/medias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createEpisode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n         \r\n    \r\n    \"title\" : \"sss\",\r\n    \"duration\" : 1435,\r\n    \"episodeNumber\" : 1,\r\n    \"watched\" : true\r\n\r\n            \r\n       \r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/episodes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"episodes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createSaison",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n         \r\n    \r\n    \"seasonNumber\" : 2,\r\n    \"releaseDate\" : \"ssss\",\r\n    \"episodesId\" : [\"3\",\"2\"]\r\n    \r\n\r\n            \r\n       \r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/saisons",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"saisons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateMedia",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n         \r\n    \r\n        \r\n        \"ssss\": 234234,\r\n        \"rating\": 200,\r\n        \"duration\": 200,\r\n        \"watched\": false\r\n        \r\n            \r\n       \r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/medias/5",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateEpisode",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \r\n        \"watched\": false\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/episodes/4",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"episodes",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMediaFilter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/medias?type=serie&genre=drama&year=2020",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"medias"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "serie"
+						},
+						{
+							"key": "genre",
+							"value": "drama"
+						},
+						{
+							"key": "year",
+							"value": "2020"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:3000"
+		}
+	]
+}
