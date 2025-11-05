@@ -21,6 +21,10 @@ import EpisodeRouteV2 from "./routes/v2/EpisodeRouteV2"
 import RatingRouteV2 from "./routes/v2/RatingRouteV2"
 import config from "./config/config";
 
+
+import CityCodeNameRoute from './routes/v3/CityCodeNameRoute';
+import { CityCodeNameService } from './services/v3/CityCodeNameService';
+
 const win = require('./winston/winstonLogger')
 
 
@@ -50,6 +54,8 @@ app.use('/api/v2', EpisodeRouteV2)
 app.use('/api/v2', RatingRouteV2)
 
 
+
+app.use('/api/v3', CityCodeNameRoute)
 
 
 app.use('/docs/v1', swaggerUi.serveFiles(swaggerDocument), swaggerUi.setup(swaggerDocument));
@@ -124,3 +130,7 @@ const run = async () => {
 };
 
 run();
+
+
+
+
