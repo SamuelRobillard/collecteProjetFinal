@@ -137,5 +137,5 @@ run();
 
 
 
-console.log(getAmadeusToken())
+
 
