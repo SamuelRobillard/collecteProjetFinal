@@ -24,6 +24,7 @@ import config from "./config/config";
 
 import CityCodeNameRoute from './routes/v3/CityCodeNameRoute';
 import { CityCodeNameService } from './services/v3/CityCodeNameService';
+import { getAmadeusToken } from './services/v3/Utils';
 
 const win = require('./winston/winstonLogger')
 
@@ -133,4 +134,8 @@ run();
 
 
 
+
+
+
+console.log(getAmadeusToken())
 
