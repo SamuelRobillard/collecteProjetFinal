@@ -11,7 +11,7 @@ const router = Router();
 const cityCodeNameController = new CityCodeNameController()
 
 router.get('/citycodename', cityCodeNameController.getCityCodeName);
-router.get('/getToken', CityCodeNameService.testToken);
+
 // router.get('/CityCodeName/Name', cityCodeNameController.getAllEpisode);
 // router.get('/CityCodeName/Code', cityCodeNameController.getAllEpisode);
 // router.get('/users/:id/medias', userController.getAllMediaOfUser)

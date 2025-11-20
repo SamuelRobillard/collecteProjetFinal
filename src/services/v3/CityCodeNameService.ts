@@ -7,7 +7,7 @@ import MovieV2, { IMovie } from "../../models/v2/MovieV2";
 import { HttpError } from "../../utils/HttpError";
 import CityCodeName, { ICityCodeName } from "../../models/v3/CityCodeName";
 import FormatedStringRegex from "../../Regex/FormatedStringRegex";
-import { getAmadeusToken } from "./Utils";
+
 
 export class CityCodeNameService {
 
@@ -95,10 +95,6 @@ export class CityCodeNameService {
   }
 
 
-  public static async testToken(): Promise<string> {
-    
 
-    return getAmadeusToken()
-  }
 
 }
