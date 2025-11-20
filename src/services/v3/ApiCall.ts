@@ -28,7 +28,7 @@ public static async getAHugeBunchOfHotel (latitude : number, longitude : number)
         }
       }
     );
-
+    console.log(response.data)
     return response.data;
 
   } catch (error: any) {
@@ -37,13 +37,14 @@ public static async getAHugeBunchOfHotel (latitude : number, longitude : number)
   }
 };
 
-public static async getHotelByCityCode (cityCode : number, radius : number) : Promise<string> {
+public static async getHotelByCityCode (cityCode : string, radius : number) : Promise<string> {
   try {
     const response = await api.get(
       "/v1/reference-data/locations/hotels/by-geocode",
       {
         params: {
           cityCode: cityCode,
+          // max de 300 je penses
           radius: radius,
           radiusUnit: "KM",
           hotelSource: "ALL",

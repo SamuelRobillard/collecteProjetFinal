@@ -47,7 +47,7 @@ export class CityCodeNameService {
       }
     
     
-    return cityCodeName;
+   
   }
 
 
@@ -81,6 +81,8 @@ export class CityCodeNameService {
   public static async getCityCodeByItsName(cityName : string): Promise<string[] | null> {
     try {
         cityName = FormatedStringRegex.formatedString(cityName)
+
+        console.log("im here"  + cityName)
         const cityCodeNames = await CityCodeName.find({cityName : cityName});
         if (cityCodeNames && cityCodeNames.length > 0) {
             const allCodes = cityCodeNames.map((element) => element.cityCode); // Utilisation de map pour créer un tableau de cityCode

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { CityCodeNameService } from '../../services/v3/CityCodeNameService';
-import CityCodeName from '../../models/v3/CityCodeName';
+
 
 
 
