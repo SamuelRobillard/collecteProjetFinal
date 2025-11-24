@@ -10,6 +10,7 @@ const router = Router();
 const hotelController = new HotelController()
 
 router.get('/hotel', hotelController.getHotelById);
+router.post('/hotel', hotelController.createHotel);
 
 
 

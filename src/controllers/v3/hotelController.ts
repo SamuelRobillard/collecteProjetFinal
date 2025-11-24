@@ -16,7 +16,7 @@ export class HotelController {
  
 
   public async getHotelById(req: Request, res: Response): Promise<Response> {
-    const { hotelId} = req.body;  // Les paramètres sont dans req.query
+    const { hotelId} = req.query;  // Les paramètres sont dans req.query
 
     try {
       
@@ -33,5 +33,17 @@ export class HotelController {
       return res.status(500).json({ message: 'Erreur interne du serveur', error: error instanceof Error ? error.message : 'Erreur inconnue' });
     }
   }
+  public async createHotel(req: Request, res: Response): Promise<Response> {
+    const {hotelId, name  } = req.body;
+
+    
+    
+    try {
+      const hotelQuality = await HotelService.createHotel(hotelId, name);
+      return res.status(201).json({ message: 'HotelQuality créé avec succès', hotelQuality });
+    } catch (error: unknown) {
+     return res.status(400).json({message : "probleme creation de hotelQuality"})
+    
+  }}
 
 }

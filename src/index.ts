@@ -22,6 +22,7 @@ import RatingRouteV2 from "./routes/v2/RatingRouteV2"
 import config from "./config/config";
 import HotelRoute from "./routes/v3/HotelRoute"
 import HotelLocationRoute from "./routes/v3/HotelLocationRoute"
+import HotelQualityRoute from "./routes/v3/HotelQualityRoute"
 
 
 import CityCodeNameRoute from './routes/v3/CityCodeNameRoute';
@@ -60,6 +61,7 @@ app.use('/api/v2', RatingRouteV2)
 app.use('/api/v3', CityCodeNameRoute)
 app.use('/api/v3', HotelRoute)
 app.use('/api/v3', HotelLocationRoute)
+app.use('/api/v3', HotelQualityRoute)
 
 
 app.use('/docs/v1', swaggerUi.serveFiles(swaggerDocument), swaggerUi.setup(swaggerDocument));

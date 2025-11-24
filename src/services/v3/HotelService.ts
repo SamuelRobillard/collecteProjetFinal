@@ -23,7 +23,7 @@ export class HotelService {
      
     });
 
-    // Sauvegarder l'utilisateur dans la base de données
+    
     try{
         const HotelAlreadyExist = await Hotel.findOne({
             hotelId : hotelId

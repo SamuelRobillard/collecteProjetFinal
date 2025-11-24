@@ -27,7 +27,8 @@ export class CityCodeNameController {
 
   public async getCityCodeName(req: Request, res: Response): Promise<Response> {
     const { cityCode, cityName } = req.query;  // Les paramètres sont dans req.query
-
+    
+    
     try {
       if (cityName) {
         // Si l'utilisateur a filtré par cityName, on retourne le cityCode

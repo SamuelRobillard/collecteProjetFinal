@@ -18,12 +18,13 @@ export class HotelLocationController {
 
   public async getHotelLocationByCity(req: Request, res: Response): Promise<Response> {
     
-    const {cityName, cityCode} = req.body;  // Les paramètres sont dans req.query
+    const {cityName} = req.query;  // Les paramètres sont dans req.query
    
 
     console.log("asdasdada" + cityName)
     try {
-        const name = await  CityCodeNameService.getCityCodeByItsName(cityName)
+
+        const name = await  CityCodeNameService.getCityCodeByItsName(cityName as string)
 
         // Si l'utilisateur a filtré par cityName, on retourne le cityCode
         const hotels = await HotelLocationService.getHotelLocationByCity(name as string[]);

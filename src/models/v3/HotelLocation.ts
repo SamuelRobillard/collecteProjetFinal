@@ -2,7 +2,7 @@
 import { Schema, model, Document, Types } from 'mongoose';
 
 export interface IHotelLocation extends Document {
-  hotelId: Types.ObjectId;          
+  hotelId: string;          
   cityCode: string; 
   countryCode : string;       
   latitude: number;  
@@ -11,7 +11,7 @@ export interface IHotelLocation extends Document {
 
 const HotelLocationSchema = new Schema<IHotelLocation>(
   {
-    hotelId: { type: Schema.Types.ObjectId,  ref: 'Hotel',  required: true },
+    hotelId: { type: String,  ref: 'Hotel',  required: true },
     cityCode: { type: String, required: true },
     countryCode:  { type: String, required: true },
     latitude :  { type: Number, required: true },
