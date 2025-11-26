@@ -9,7 +9,7 @@ export class HotelLocationService {
   
   public static async createHotelLocation(hotelId: string, cityCode: string, countryCode : string, latitude : number, longitude : number): Promise<any> {
     
-  
+    
     const hotelLocation = new HotelLocation({
        hotelId,
        cityCode,
@@ -21,7 +21,7 @@ export class HotelLocationService {
      
     });
 
-
+    console.log("hahahaha ", hotelLocation)
     try{
         const HotelAlreadyExist = await HotelLocation.findOne({
             hotelId : hotelId
