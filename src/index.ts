@@ -138,7 +138,7 @@ const run = async () => {
 
 run();
 
-// pas decommenter pour l'instant
+
 // StockHotelService.createLots()
 
 

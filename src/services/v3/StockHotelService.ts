@@ -16,7 +16,7 @@ export class StockHotelService {
     public static async createLots(): Promise<any> {
         try {
             
-          const response = await ApiCall.getAHugeBunchOfHotel(1, 1);  
+          const response = await ApiCall.getAHugeBunchOfHotel(41.397158, 2.160873);  
       
           
           console.log("Réponse API:", response);  
@@ -39,7 +39,7 @@ export class StockHotelService {
       
                
                 await HotelLocationService.createHotelLocation(
-                  hotel,
+                  hotel.hotelId,
                   hotel.address.cityName,  
                   hotel.address.countryCode,  
                   hotel.geoCode.latitude,
