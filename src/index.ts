@@ -27,6 +27,7 @@ import HotelQualityRoute from "./routes/v3/HotelQualityRoute"
 
 import CityCodeNameRoute from './routes/v3/CityCodeNameRoute';
 import { ApiCall } from './services/v3/ApiCall';
+import { StockHotelService } from './services/v3/StockHotelService';
 
 const win = require('./winston/winstonLogger')
 
@@ -42,19 +43,19 @@ const isProduction = config.env === 'production';
 
 
 app.use(express.json());
-app.use('/api/v1', userRoutes)
-app.use('/api/v1', mediaRoute)
-app.use('/api/v1', loggerRoute)
-app.use('/api/v1', episodeRoute)
-app.use('/api/v1', saisonRoute)
+// app.use('/api/v1', userRoutes)
+// app.use('/api/v1', mediaRoute)
+// app.use('/api/v1', loggerRoute)
+// app.use('/api/v1', episodeRoute)
+// app.use('/api/v1', saisonRoute)
 
 
-app.use('/api/v2', userRouteV2)
-app.use('/api/v2', MovieRouteV2)
-app.use('/api/v2', SerieRouteV2)
-app.use('/api/v2', SeasonRouteV2)
-app.use('/api/v2', EpisodeRouteV2)
-app.use('/api/v2', RatingRouteV2)
+// app.use('/api/v2', userRouteV2)
+// app.use('/api/v2', MovieRouteV2)
+// app.use('/api/v2', SerieRouteV2)
+// app.use('/api/v2', SeasonRouteV2)
+// app.use('/api/v2', EpisodeRouteV2)
+// app.use('/api/v2', RatingRouteV2)
 
 
 
@@ -137,8 +138,8 @@ const run = async () => {
 
 run();
 
-
-
+// pas decommenter pour l'instant
+// StockHotelService.createLots()
 
 
 
