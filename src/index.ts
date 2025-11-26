@@ -19,11 +19,22 @@ import SeasonRouteV2 from "./routes/v2/SeasonRouteV2";
 import EpisodeRouteV2 from "./routes/v2/EpisodeRouteV2";
 import RatingRouteV2 from "./routes/v2/RatingRouteV2";
 import config from "./config/config";
+
 import HotelRoute from "./routes/v3/HotelRoute";
 import HotelLocationRoute from "./routes/v3/HotelLocationRoute";
 import HotelQualityRoute from "./routes/v3/HotelQualityRoute";
 import BookingRoute from "./routes/v3/BookingRoute";
 import UserRoute from "./routes/v3/UserRoute"
+
+
+
+
+import CityCodeNameRoute from './routes/v3/CityCodeNameRoute';
+import { ApiCall } from './services/v3/ApiCall';
+import { StockHotelService } from './services/v3/StockHotelService';
+
+const win = require('./winston/winstonLogger')
+
 
 import CityCodeNameRoute from "./routes/v3/CityCodeNameRoute";
 import { ApiCall } from "./services/v3/ApiCall";
@@ -39,6 +50,7 @@ const isProduction = config.env === "production";
 // Middleware HTTPS uniquement en prod derrière proxy
 
 app.use(express.json());
+
 // app.use("/api/v1", userRoutes);
 // app.use("/api/v1", mediaRoute);
 // app.use("/api/v1", loggerRoute);
@@ -72,6 +84,7 @@ app.use(
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, TypeScript with Express! Connexion sécurisée.");
+
 });
 
 // Créer le serveur HTTPS
@@ -117,3 +130,16 @@ const run = async () => {
 };
 
 run();
+
+
+
+// StockHotelService.createLots()
+
+
+
+
+
+
+
+
+

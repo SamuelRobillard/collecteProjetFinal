@@ -12,6 +12,8 @@ import { HttpError } from "../../utils/HttpError";
 export class HotelQualityService {
 
 
+
+
   
   public static async createHotelQuality(hotelId: string, price: number, rating : number): Promise<any> {
     
@@ -52,6 +54,8 @@ export class HotelQualityService {
    
   }
 
+  
+
   public static async updateHotelQualityService(hotelId: string, updateData: Partial<IHotelQuality>): Promise<IHotelQuality> {
   
 
@@ -87,11 +91,11 @@ export class HotelQualityService {
     
      
 
-    if (!hotel) {
+    if (!updatedHotel) {
       throw new HttpError('hotel non trouvé.', 404);
     }
 
-    return hotel;
+    return updatedHotel;
   }
 
 }

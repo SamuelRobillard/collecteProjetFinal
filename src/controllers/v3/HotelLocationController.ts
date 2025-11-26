@@ -40,4 +40,20 @@ export class HotelLocationController {
     }
   }
 
+
+    public async updateHotelLocation(req:Request,res:Response):Promise<Response>{
+        const hotelId = req.params.id
+        console.log(hotelId)
+      try { 
+      
+        const hotelLocation = await HotelLocationService.updateHotelLocationService(hotelId as string,req.body);
+        return res.status(201).json({message:"The location of this hotel has been modified",hotelLocation})
+        
+      } catch (error:unknown) {
+        return res.status(401).json({message:"Unathorized action"})
+      }
+    }
+
+
+
 }
