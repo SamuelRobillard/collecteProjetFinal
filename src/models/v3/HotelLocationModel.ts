@@ -9,8 +9,7 @@ export interface IHotelLocation extends Document {
   longitude : number;
 }
 
-const HotelLocationSchema = new Schema<IHotelLocation>(
-  {
+const HotelLocationSchema = new Schema<IHotelLocation> ({
     hotelId: { type: String,  ref: 'Hotel',  required: true },
     cityCode: { type: String, required: true },
     countryCode:  { type: String, required: true },

@@ -1,6 +1,6 @@
 
 
-import HotelLocation, { IHotelLocation } from "../../models/v3/HotelLocation";
+import HotelLocation, { IHotelLocation } from "../../models/v3/HotelLocationModel";
 
 
 export class HotelLocationService {
