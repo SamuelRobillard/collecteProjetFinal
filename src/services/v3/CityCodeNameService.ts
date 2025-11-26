@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 import { Types } from 'mongoose';
 import MovieV2, { IMovie } from "../../models/v2/MovieV2";
 import { HttpError } from "../../utils/HttpError";
-import CityCodeName, { ICityCodeName } from "../../models/v3/CityCodeName";
+import CityCodeName, { ICityCodeName } from "../../models/v3/CityCodeNameModel";
 import FormatedStringRegex from "../../Regex/FormatedStringRegex";
 
 

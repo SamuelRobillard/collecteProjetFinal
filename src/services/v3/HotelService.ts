@@ -2,8 +2,8 @@
 
 
 
-import  { IHotel } from "../../models/v3/Hotel";
-import Hotel from "../../models/v3/Hotel";
+import  { IHotel } from "../../models/v3/HotelModel";
+import Hotel from "../../models/v3/HotelModel";
 
 
 export class HotelService {

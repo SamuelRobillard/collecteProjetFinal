@@ -1,7 +1,11 @@
 
 
-import HotelLocation, { IHotelLocation } from "../../models/v3/HotelLocation";
+
+import HotelLocation, { IHotelLocation } from "../../models/v3/HotelLocationModel";
+
+
 import { HttpError } from "../../utils/HttpError";
+
 
 
 export class HotelLocationService {
