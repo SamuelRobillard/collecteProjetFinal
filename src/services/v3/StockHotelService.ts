@@ -2,9 +2,7 @@
 
 
 
-import  { IHotel } from "../../models/v3/Hotel";
-import Hotel from "../../models/v3/Hotel";
-import HotelLocation from "../../models/v3/HotelLocation";
+
 import { ApiCall } from "./ApiCall";
 import { HotelLocationService } from "./HotelLocationService";
 import { HotelService } from "./HotelService";

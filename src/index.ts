@@ -36,10 +36,6 @@ import { StockHotelService } from './services/v3/StockHotelService';
 const win = require('./winston/winstonLogger')
 
 
-import CityCodeNameRoute from "./routes/v3/CityCodeNameRoute";
-import { ApiCall } from "./services/v3/ApiCall";
-
-const win = require("./winston/winstonLogger");
 
 const app = express();
 const port = config.port;
