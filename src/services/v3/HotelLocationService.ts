@@ -1,6 +1,7 @@
 
 
 import HotelLocation, { IHotelLocation } from "../../models/v3/HotelLocation";
+import { HttpError } from "../../utils/HttpError";
 
 
 export class HotelLocationService {
@@ -56,5 +57,50 @@ export class HotelLocationService {
       throw new Error('Error retrieving hotel locations: ' + error);
     }
   }
+
+    public static async updateHotelLocationService(hotelId:string,updateData:Partial<IHotelLocation>):Promise<IHotelLocation>{
+
+      const hotel =  await HotelLocation.findOne({
+          hotelId:hotelId
+      })
+
+      const updatedHotelLocation = hotel
+
+         try {
+
+          if(updatedHotelLocation !== null){
+          
+            if(updateData.cityCode !== undefined ){
+              updatedHotelLocation.cityCode = updateData.cityCode
+            }
+
+            if(updateData.countryCode !== undefined ){
+              updatedHotelLocation.countryCode = updateData.countryCode
+            }
+            if(updateData.longitude !== undefined ){
+              updatedHotelLocation.longitude = updateData.longitude
+            }
+
+            if(updateData.latitude !== undefined){
+              updatedHotelLocation.latitude = updateData.latitude
+            }
+            
+            updatedHotelLocation.save()
+
+          }
+          } 
+          catch {
+
+         }
+         
+         if(!updatedHotelLocation){
+          throw new HttpError('Hôtel non trouvé',404)
+         }
+
+         return hotel
+
+    }
+
+
 }
 

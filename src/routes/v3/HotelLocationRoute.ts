@@ -12,7 +12,7 @@ const hotelLocationController = new HotelLocationController()
 
 router.get('/hotelsLocationByCity', hotelLocationController.getHotelLocationByCity);
 
-
+router.put('/hotelsLocation/:id',hotelLocationController.updateHotelLocation)
 
 
 
