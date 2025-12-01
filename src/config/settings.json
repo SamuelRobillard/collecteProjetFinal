@@ -10,7 +10,8 @@
   ],
    "rateLimit": {
     "/api/v2/login": { "windowMs": 60, "max": 3 },
-    "/api/v2/ratings": { "windowMs": 60, "max": 10 }
+    "/api/v2/ratings": { "windowMs": 60, "max": 10 },
+    "/api/v3/login": { "windowMs": 60, "max": 3 }
     
   }
 }
