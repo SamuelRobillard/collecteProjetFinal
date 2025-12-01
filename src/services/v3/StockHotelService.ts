@@ -3,6 +3,7 @@
 
 
 
+import FormatedStringRegex from "../../Regex/FormatedStringRegex";
 import { ApiCall } from "./ApiCall";
 import { HotelLocationService } from "./HotelLocationService";
 import { HotelService } from "./HotelService";
@@ -56,6 +57,48 @@ export class StockHotelService {
       }
       
       
+      public static async createHotelByCity(cityCode : string, radius : number): Promise<any> {
+        try {
+            
+          const response = await ApiCall.getHotelByCityCode(cityCode, radius);  
       
+          
+          console.log("Réponse API:", response);  
+          
+       
+          if (response && Array.isArray(response.data)) {
+          
+            for (const hotel of response.data) {
+            
+
+              
+              if (hotel.name && hotel.hotelId && hotel.geoCode && hotel.address) {
+                console.log(`Nom de l'hôtel: ${hotel.name}`);
+                if(!FormatedStringRegex.isTestInName(hotel.name)){
+                  console.log(`Nom de l'hôtel: ${hotel.name}`  + "saved");
+                  
+                  
+                  await HotelService.createHotel(hotel.hotelId, hotel.name);
+                  await HotelLocationService.createHotelLocation(
+                    hotel.hotelId,
+                    hotel.address.cityName,  
+                    hotel.address.countryCode,  
+                    hotel.geoCode.latitude,
+                    hotel.geoCode.longitude
+                  );
+                }
+               
+              } else {
+                console.warn(`Données manquantes pour l'hôtel ${hotel.name || hotel.hotelId}`);
+              }
+            }
+            
+          } else {
+            console.log("Aucun hôtel trouvé.");
+          }
+        } catch (error) {
+          console.error("Erreur lors de la création des hôtels :", error || error);
+        }
+      }   
 
 }

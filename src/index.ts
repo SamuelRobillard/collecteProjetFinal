@@ -124,12 +124,11 @@ const run = async () => {
   // Connect to MongoDB
   await connectDB();
 };
-
 run();
 
 
 
-// StockHotelService.createLots()
+// ApiCall.getPriceByListOfHotel(["HNPARKGU"])
 
 
 

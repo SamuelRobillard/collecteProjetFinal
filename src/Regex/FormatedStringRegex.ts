@@ -39,4 +39,11 @@ export default class FormatedStringRegex {
 
     }
 
+    static isTestInName(string: string): boolean {
+        const regex = /test/gi;  
+        return regex.test(string);   
+    }
+    
+    
+
 }

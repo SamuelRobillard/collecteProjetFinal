@@ -11,41 +11,25 @@ export class HotelService {
 
   
   public static async createHotel(hotelId: string, name: string): Promise<any> {
-   
-    
-    // Créer un nouvel utilisateur
-    
-    const hotel = new Hotel({
-       hotelId,
-       name
-       
+    const hotelData = {
+        hotelId,
+        name
+    };
 
-     
-    });
+    try {
+        // Use findOneAndUpdate with upsert: true to either update the hotel or create it if it doesn't exist
+        const hotel = await Hotel.findOneAndUpdate(
+            { hotelId: hotelId },    // Find by hotelId
+            { $set: hotelData },      // Set the fields to be updated or inserted
+            { new: true, upsert: true }  // Return the updated or newly created document
+        );
 
-    
-    try{
-        const HotelAlreadyExist = await Hotel.findOne({
-            hotelId : hotelId
-        });
-        
-        if(HotelAlreadyExist != null){
-            return  { message: `code :  ${hotelId} already exists` };
-        }
-        
-        else{
-            await hotel.save();
-            return { hotel: hotel };
-        }
-            
-    }
-    catch (error) {
+        return { hotel };  // Return the hotel (updated or newly created)
+    } catch (error) {
         throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
-      }
-    
-    
-   
-  }
+    }
+}
+
 
 
 
