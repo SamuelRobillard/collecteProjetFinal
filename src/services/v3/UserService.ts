@@ -11,7 +11,8 @@ export class UserService {
     firstName: string,
     lastName: string,
     email: string,
-    password: string
+    password: string,
+    role: string
   ): Promise<any> {
     // Vérifier si l'email existe déjà
     const existingUser = await User.findOne({ email });
@@ -27,6 +28,7 @@ export class UserService {
       lastName,
       email,
       password: hashedPassword, // Utilisation du mot de passe haché
+      role: role || 'user' // Par défaut 'user'
     });
 
     // Sauvegarder l'utilisateur dans la base de données

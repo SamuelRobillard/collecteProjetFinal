@@ -39,6 +39,7 @@ export class UserController {
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
+          role: user.role
         },
         JWT_SECRET,
         { expiresIn: "1h" }
@@ -65,7 +66,7 @@ export class UserController {
   }
 
   public async createUser(req: Request, res: Response): Promise<Response> {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, role } = req.body;
 
     // Vérification si le mot de passe est fourni
     if (!password) {
@@ -77,7 +78,8 @@ export class UserController {
         firstName,
         lastName,
         email,
-        password
+        password,
+        role
       );
       return res
         .status(201)
