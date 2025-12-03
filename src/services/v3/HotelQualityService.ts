@@ -15,87 +15,102 @@ export class HotelQualityService {
 
 
   
-  public static async createHotelQuality(hotelId: string, price: number, rating : number): Promise<any> {
-    
-    let ratioPriceQuality;
-    // Créer un nouvel utilisateur
-    try {
-        ratioPriceQuality = rating / price
+  public static async createHotelQuality( hotelId: string, price: number, rating: number, ratioPriceQuality: number, nbRating: number): Promise<any> {
 
-    }
-    catch{
-        ratioPriceQuality = 0
-    }
-    
-    const hotel = new HotelQuality({
-       hotelId ,
-       price,
-       rating,
-       ratioPriceQuality
-       
 
-     
-    });
-
-    
-    try{
-       
-        await hotel.save();
-        return { hotel: hotel };
+    const hotelQuality = {
+        hotelId,
+        price,
+        rating,
+        ratioPriceQuality,
+        nbRating,
         
-            
-    }
-    catch (error) {
-        console.error('Erreur lors de la sauvegarde de l\'hotel:', error);
-        throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
-      }
-    
-    
+    };
+
+    try {
    
-  }
+     
+        const hotelQualityUpdate = await HotelQuality.findOneAndUpdate(
+            { hotelId: hotelId },        
+            { $set: hotelQuality },  
+            
+            //sert a cree si trouve pas
+            { new: true, upsert: true }  
+        );
+
+        return { hotel: hotelQualityUpdate };  
+    } catch (error) {
+        throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
+    }
+}
 
   
 
-  public static async updateHotelQualityService(hotelId: string, updateData: Partial<IHotelQuality>): Promise<IHotelQuality> {
+  public static async updateHotelQualityService(hotelId: string, updateData: Partial<IHotelQuality>): Promise<IHotelQuality | null> {
   
 
-    // Si on veut mettre à jour le mot de passe, on le hash
+    
     
     
     const hotel = await HotelQuality.findOne({
         hotelId : hotelId
     })
-      
-    const updatedHotel = hotel
-    try{
-      if(updatedHotel!== null){
+    if(hotel !== null){
+      const updatedHotel = hotel
+      try{
+        if(updatedHotel!== null){
+          
+          if(updateData.price !== undefined){
+              updatedHotel.price =  updateData.price 
+          }
+           if(updateData.rating !== undefined){
+              updatedHotel.rating =  updateData.rating 
+          }
+          if(updateData.nbRating !== undefined){
+            updatedHotel.nbRating =  updateData.nbRating 
+        }
+  
+          updatedHotel.ratioPriceQuality = updatedHotel.rating / updatedHotel.price
+          updatedHotel.save()
+      } 
+       return updatedHotel
+      }
         
-        if(updateData.price !== undefined){
-            updatedHotel.price =  updateData.price 
-        }
-         if(updateData.rating !== undefined){
-            updatedHotel.rating =  updateData.rating 
-        }
-
-        updatedHotel.ratioPriceQuality = updatedHotel.rating / updatedHotel.price
-        updatedHotel.save()
-    }  
+      catch{
+        return null
+      }
     }
-    
-    catch{
-
-    }
+ 
     
         
     
     
      
 
-    if (!updatedHotel) {
-      throw new HttpError('hotel non trouvé.', 404);
+    else {
+      
+      return null
     }
 
-    return updatedHotel;
+    
   }
 
+
+
+  public static async getHotelQualityById(hotelId : string): Promise<IHotelQuality | null> {
+    try {
+        
+        const hotel = await HotelQuality.findOne({hotelId : hotelId});
+        if(hotel != null){
+          console.log(hotel)
+            return hotel
+        }
+
+        return null
+      
+      
+    } catch (error) {
+      throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
+    }
+  }
 }

@@ -3,11 +3,13 @@
 
 
 
+import { IHotelQuality } from "../../models/v3/HotelQualityModel";
 import FormatedStringRegex from "../../Regex/FormatedStringRegex";
 import { ApiCall } from "./ApiCall";
 import { HotelLocationService } from "./HotelLocationService";
+import { HotelQualityService } from "./HotelQualityService";
 import { HotelService } from "./HotelService";
-
+import {faker} from "@faker-js/faker"
 
 export class StockHotelService {
 
@@ -101,4 +103,61 @@ export class StockHotelService {
         }
       }   
 
+
+      public static async fillBd(): Promise<any> {
+        const listHotelId = await HotelService.getAllHotelId()
+        
+        try {
+          if(listHotelId !== null){
+            listHotelId.forEach(async hotel => {
+              
+              const isValide = await HotelQualityService.getHotelQualityById(hotel)
+              console.log(isValide)
+            if(isValide == null){
+              this.createHotelByPriceApi([hotel])
+            }
+          });
+          }
+          
+        }
+        catch (error) {
+          console.error("Erreur lors de la création des hôtels :", error || error);
+        }
+        return true;
+      }
+
+      public static async createHotelByPriceApi(listHotelArray : string[]): Promise<any> {
+        try {
+            
+          const response = "await ApiCall.getPriceByListOfHotel(listHotelArray);  "
+          
+          
+          
+          if(Array.isArray(response)){
+            const updateData: Partial<IHotelQuality> = {
+              price:response[1],  // nouveau prix
+              rating: faker.number.int(100),  // nouvelle note
+              nbRating: faker.number.int(100)  // nouvelle note
+            };
+              HotelQualityService.createHotelQuality(response[0], response[1], 0,0,0)
+              HotelQualityService.updateHotelQualityService(response[0], updateData)
+          }
+          else{
+            const updateData: Partial<IHotelQuality> = {
+              
+              price: (Number)(faker.commerce.price({min : 50, max : 1500})),  // nouveau prix
+              rating: (Number)(faker.commerce.price({min : 10, max : 100, dec : 0})),
+              nbRating: (Number)(faker.commerce.price({min : 10, max : 400, dec : 0})),
+            };
+            console.log(updateData)
+            await HotelQualityService.createHotelQuality(listHotelArray[0] as string, 0, 0,0,0)
+            
+            await HotelQualityService.updateHotelQualityService(listHotelArray[0] as string, updateData)
+          }
+       
+          
+        } catch (error) {
+          console.error("Erreur lors de la création des hôtels :", error || error);
+        }
+      }   
 }

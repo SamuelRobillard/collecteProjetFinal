@@ -1,3 +1,4 @@
+import { compareSync } from "bcryptjs";
 import api from "../../utils/v3/axiosClient";
 
 
@@ -83,42 +84,17 @@ public static async getPriceByListOfHotel(listHotelArray: string[]): Promise<any
         }
       }
     );
-
-    // Check if response.data is an array and has at least one item
-    if (response && Array.isArray(response.data)) {
-          
-      for (const hotel of response.data) {
-      
-        if (hotel.name && hotel.hotelId) {
-          // Affichage des informations de l'hôtel
-      
-          if (hotel.offers && Array.isArray(hotel.offers)) {
-            for (const offer of hotel.offers) {
-              // Access the price from each offer
-              if (offer.price) {
-                const price = offer.price;
-                console.log(`Prix total: ${price.currency} ${price.total}`);
-              } else {
-                console.warn(`Price data missing for offer ${offer.id}`);
-              }
-            }
-          }
-        } else {
-          console.warn(`Données manquantes pour l'hôtel ${hotel.name || hotel.hotelId}`);
-        }
-      }
-    } 
-    
-    
-    else {
-      // If response.data is not an array or is empty, throw an error
-      console.error("Expected an array with hotel data, but got:", response.data);
-      throw new Error("The response data is not in the expected format.");
+    if(response.data.data[0].offers[0].id !== undefined && response.data.data[0].offers[0].price.total !== undefined ){
+      return  [response.data.data[0].hotel.hotelId, response.data.data[0].offers[0].price.total ]
     }
+   
+   return listHotelSeparatedComma
 
   } catch (error: any) {
+    
     console.error("Erreur Amadeus:", error.response?.data || error.message);
-    throw error;
+    return listHotelSeparatedComma
+    
   }
 }
 

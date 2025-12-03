@@ -74,7 +74,22 @@ export class HotelLocationService {
     return updatedHotelLocation;  
 }
 
+public static async getHotelLocationById(hotelId : string): Promise<IHotelLocation | null> {
+    try {
+        
+        const hotel = await HotelLocation.findOne({hotelId : hotelId});
+        if(hotel != null){
+          
+            return hotel
+        }
 
+        return null
+      
+      
+    } catch (error) {
+      throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
+    }
+  }
 
 }
 
