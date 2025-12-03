@@ -52,8 +52,18 @@ export class BookingService {
 
 
   public static async deleteBookingByHotelId(hotelId:string){
-      const booking = await Booking.findByIdAndDelete(hotelId) 
-        
-      return booking;
+
+    try {
+      const AlreadyExist =  await Booking.findOne({hotelId:hotelId});
+
+      if(AlreadyExist != null){
+        const booking =  await Booking.findOneAndDelete({hotelId:hotelId})
+        return booking;
+      }
+    } catch (error) {
+       throw new  Error("Impossible  de supprimer le booking de cet hôtel." + error );
+    }
+
+
   }
 }
