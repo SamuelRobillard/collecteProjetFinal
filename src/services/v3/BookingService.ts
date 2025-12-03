@@ -35,9 +35,9 @@ export class BookingService {
     }
   }
 
-  public static async getBookingByUserId(userId: string): Promise<IBooking | null> {
+  public static async getBookingsByUserId(userId: string): Promise<IBooking[] | null> {
     try {
-      const booking = await Booking.findOne({ userId: userId });
+      const booking = await Booking.find({ userId: userId });
       if (booking != null) {
         return booking;
       }
@@ -48,5 +48,12 @@ export class BookingService {
         "Erreur lors de la récupération des cityCodeName: " + error
       );
     }
+  }
+
+
+  public static async deleteBookingByHotelId(hotelId:string){
+      const booking = await Booking.findByIdAndDelete(hotelId) 
+        
+      return booking;
   }
 }
