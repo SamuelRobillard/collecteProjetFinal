@@ -6,7 +6,7 @@ export interface IHotelQuality extends Document {
   rating : number;
   ratioPriceQuality : number;
   nbRating: number;
-  nbReview: number;
+  
 }
 
 const HotelSchema = new Schema<IHotelQuality> ({
@@ -15,7 +15,7 @@ const HotelSchema = new Schema<IHotelQuality> ({
     rating: { type: Number, required: true },
     ratioPriceQuality: { type: Number, required: true },
     nbRating: { type: Number, required: true },
-    nbReview: { type: Number, required: true },
+   
   },
   { timestamps: true }
 );

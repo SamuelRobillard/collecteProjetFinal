@@ -32,6 +32,9 @@ import UserRoute from "./routes/v3/UserRoute"
 import CityCodeNameRoute from './routes/v3/CityCodeNameRoute';
 import { ApiCall } from './services/v3/ApiCall';
 import { StockHotelService } from './services/v3/StockHotelService';
+import { HotelService } from "./services/v3/HotelService";
+import { HotelQualityService } from "./services/v3/HotelQualityService";
+import { DataTransfertService } from "./services/v3/DataTransfertService";
 
 const win = require('./winston/winstonLogger')
 
@@ -130,10 +133,10 @@ run();
 
 // ApiCall.getPriceByListOfHotel(["HNPARKGU"])
 
+// StockHotelService.createHotelByPriceApi(["je suis faux ahhh faux"])
 
 
-
-
+DataTransfertService.combineAllDataForOneHotelById("WVYYZ096")
 
 
 
