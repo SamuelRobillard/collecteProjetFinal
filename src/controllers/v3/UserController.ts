@@ -66,7 +66,38 @@ export class UserController {
   }
 
   public async createUser(req: Request, res: Response): Promise<Response> {
-    const { firstName, lastName, email, password, role } = req.body;
+    const { firstName, lastName, email, password} = req.body;
+
+    // Vérification si le mot de passe est fourni
+    if (!password) {
+      return res.status(400).json({ message: "Le mot de passe est requis." });
+    }
+
+    try {
+      const user = await UserService.createUser(
+        firstName,
+        lastName,
+        email,
+        password,
+        "user"
+      );
+      return res
+        .status(201)
+        .json({ message: "Utilisateur créé avec succès", user });
+    } catch (error: unknown) {
+      if (error instanceof HttpError) {
+        return res.status(error.statusCode).json({ message: error.message });
+        // Vérifie ici que le message est bien passé
+      } else {
+        // Si l'erreur n'est pas de type Error, on renvoie une réponse générique
+        console.error("Erreur inconnue:", error);
+        return res.status(500).json({ message: "Erreur inconnue" });
+      }
+    }
+  }
+
+  public async createAdmin(req: Request, res: Response): Promise<Response> {
+    const { firstName, lastName, email, password, role} = req.body;
 
     // Vérification si le mot de passe est fourni
     if (!password) {
