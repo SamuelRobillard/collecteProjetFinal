@@ -55,19 +55,9 @@ export class HotelService {
 
   public static async getAllHotelId(): Promise<string[] | null> {
     try {
-        
         const hotels = await Hotel.find().select('hotelId');
         if(hotels != null){
-          
-            
-            const hotelIds: string[] = [];
-
-
-            hotels.forEach(hotel => {
-              hotelIds.push(hotel.hotelId);
-            });
-            return hotelIds
-            
+            return hotels.map(e => e.hotelId); 
         }
 
         return null

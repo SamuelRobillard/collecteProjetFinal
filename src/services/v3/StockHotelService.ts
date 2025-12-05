@@ -1,15 +1,10 @@
-
-
-
-
-
 import { IHotelQuality } from "../../models/v3/HotelQualityModel";
 import FormatedStringRegex from "../../Regex/FormatedStringRegex";
 import { ApiCall } from "./ApiCall";
 import { HotelLocationService } from "./HotelLocationService";
 import { HotelQualityService } from "./HotelQualityService";
 import { HotelService } from "./HotelService";
-import {faker} from "@faker-js/faker"
+import {faker} from "@faker-js/faker";
 
 export class StockHotelService {
 

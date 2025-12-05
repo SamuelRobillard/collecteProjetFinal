@@ -21,6 +21,7 @@
     "express": "^5.1.0",
     "express-rate-limit": "^8.1.0",
     "exrpess": "^0.0.1-security",
+    "fast-csv": "^5.0.5",
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
     "jsonwebtoken": "^9.0.2",

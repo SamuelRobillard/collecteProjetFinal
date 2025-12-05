@@ -1,4 +1,4 @@
-export default class DataTransfertHotelInfo {
+export default class DataTransferHotelInfo {
     hotel: string;
     name: string;
     country: string;

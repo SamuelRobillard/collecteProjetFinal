@@ -34,7 +34,8 @@ import { ApiCall } from './services/v3/ApiCall';
 import { StockHotelService } from './services/v3/StockHotelService';
 import { HotelService } from "./services/v3/HotelService";
 import { HotelQualityService } from "./services/v3/HotelQualityService";
-import { DataTransfertService } from "./services/v3/DataTransfertService";
+import { DataTransferService } from "./services/v3/DataTransferService";
+import { ToCsvService } from "./services/v3/ToCsvService";
 
 const win = require('./winston/winstonLogger')
 
@@ -124,8 +125,22 @@ if (config.env === "production") {
 }
 
 const run = async () => {
-  // Connect to MongoDB
-  await connectDB();
+  // // Connect to MongoDB
+  // await connectDB();
+  try {
+    // Connect to MongoDB
+    console.log('Connexion à MongoDB...');
+    await connectDB();
+    console.log('MongoDB connecté avec succès!');
+    
+    // MAINTENANT tu peux appeler ToCsvService
+    console.log('Début de la création du CSV...');
+    await ToCsvService.createCsv(); // Utilise createCsv() au lieu de createHotelCsv()
+    console.log('CSV créé avec succès!');
+    
+  } catch (error) {
+    console.error('Erreur:', error);
+  }
 };
 run();
 
@@ -136,8 +151,6 @@ run();
 // StockHotelService.createHotelByPriceApi(["je suis faux ahhh faux"])
 
 
-DataTransfertService.combineAllDataForOneHotelById("WVYYZ096")
-
-
+// DataTransferService.combineAllDataForOneHotelById("WVYYZ096")
 
 
