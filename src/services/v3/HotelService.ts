@@ -31,12 +31,6 @@ export class HotelService {
 }
 
 
-
-
-  
-
-
-
   public static async getHotelById(hotelId : string): Promise<IHotel | null> {
     try {
         

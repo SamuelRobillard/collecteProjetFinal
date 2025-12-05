@@ -45,7 +45,7 @@ export class HotelLocationService {
     try {
       // Query the database to find hotel locations that match any cityCode in the cityCodes array
       const hotels = await HotelLocation.find({ cityCode: { $in: cityCodes } });
-
+      
       // If hotels are found, return them, else return null
       return hotels.length > 0 ? hotels : null;
       

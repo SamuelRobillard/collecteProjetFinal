@@ -97,6 +97,21 @@ export class CityCodeNameService {
   }
 
 
+    public static async getAllCityName(): Promise<string[] | null> {
+    try {
+        
+
+       
+        const cityCodeNames = await CityCodeName.distinct("cityName");
+        console.log(cityCodeNames);
+        return cityCodeNames;
+      
+      
+    } catch (error) {
+      throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
+    }
+  }
+
 
 
 }

@@ -36,6 +36,7 @@ import { HotelService } from "./services/v3/HotelService";
 import { HotelQualityService } from "./services/v3/HotelQualityService";
 import { DataTransferService } from "./services/v3/DataTransferService";
 import { ToCsvService } from "./services/v3/ToCsvService";
+import { AccessDataService } from "./services/v3/AccessDataService";
 
 const win = require('./winston/winstonLogger')
 
@@ -132,10 +133,9 @@ const run = async () => {
     console.log('Connexion à MongoDB...');
     await connectDB();
     console.log('MongoDB connecté avec succès!');
-    
     // MAINTENANT tu peux appeler ToCsvService
     console.log('Début de la création du CSV...');
-    await ToCsvService.createCsv(); // Utilise createCsv() au lieu de createHotelCsv()
+    // await ToCsvService.createCsv(); // Utilise createCsv() au lieu de createHotelCsv()
     console.log('CSV créé avec succès!');
     
   } catch (error) {

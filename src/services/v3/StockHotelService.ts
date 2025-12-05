@@ -78,8 +78,8 @@ export class StockHotelService {
                   await HotelService.createHotel(hotel.hotelId, hotel.name);
                   await HotelLocationService.createHotelLocation(
                     hotel.hotelId,
-                    hotel.address.cityName,  
-                    hotel.address.countryCode,  
+                    hotel.address.countryCode, 
+                    FormatedStringRegex.formatedString(hotel.address.cityName),
                     hotel.geoCode.latitude,
                     hotel.geoCode.longitude
                   );

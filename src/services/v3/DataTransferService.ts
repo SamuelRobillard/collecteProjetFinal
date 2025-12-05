@@ -19,7 +19,7 @@ export class DataTransferService {
 
     public static async combineAllDataForOneHotelById(hotelId : string): Promise<DataTransferHotelInfo | null> {
         try {
-            console.log(hotelId);
+           
             const hotelName = await HotelService.getHotelById(hotelId)
             const hotelLocation = await HotelLocationService.getHotelLocationById(hotelId)
             const hotelQuality = await HotelQualityService.getHotelQualityById(hotelId)

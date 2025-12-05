@@ -151,3 +151,6 @@ csr.pem
 cert.pem
 key.pem
 # End of https://www.toptal.com/developers/gitignore/api/node
+
+# CSV
+*.csv

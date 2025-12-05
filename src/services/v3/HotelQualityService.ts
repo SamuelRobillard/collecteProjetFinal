@@ -1,8 +1,3 @@
-
-
-
-
-
 import { Types } from "mongoose";
 import Hotel from "../../models/v3/HotelModel";
 import HotelQuality, { IHotelQuality } from "../../models/v3/HotelQualityModel";
@@ -102,7 +97,6 @@ export class HotelQualityService {
         
         const hotel = await HotelQuality.findOne({hotelId : hotelId});
         if(hotel != null){
-          console.log(hotel)
             return hotel
         }
 
