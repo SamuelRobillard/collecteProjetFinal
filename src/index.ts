@@ -37,6 +37,7 @@ import { HotelQualityService } from "./services/v3/HotelQualityService";
 import { DataTransferService } from "./services/v3/DataTransferService";
 import { ToCsvService } from "./services/v3/ToCsvService";
 import { AccessDataService } from "./services/v3/AccessDataService";
+import { CityCodeNameService } from "./services/v3/CityCodeNameService";
 
 const win = require('./winston/winstonLogger')
 
@@ -133,7 +134,7 @@ const run = async () => {
     // await StockHotelService.createHotelByCity("ams",10)
     // await AccessDataService.getAllHotelDTo()
     // await StockHotelService.fillBd()
-    console.log(await AccessDataService.getBestHotelPriceRatioByCity(["montreal"]))
+   console.log(await CityCodeNameService.getAllUniqueCityName())
   } catch (error) {
     console.error('Erreur:', error);
   }

@@ -10,6 +10,7 @@ const router = Router();
 const cityCodeNameController = new CityCodeNameController()
 const accessDataController = new AccessDataController();
 router.get('/citycodename', cityCodeNameController.getCityCodeName);
+router.get('/cityuniquename', cityCodeNameController.getAllUniqueName);
 
 // router.get('/CityCodeName/Name', cityCodeNameController.getAllEpisode);
 // router.get('/CityCodeName/Code', cityCodeNameController.getAllEpisode);
