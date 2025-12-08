@@ -2,13 +2,11 @@
 import { Schema, model, Document, Types } from 'mongoose';
 
 export interface IHotel extends Document {
-  hotelId: string;          // numéro de la saison
-  name: string;        // nombre d'épisodes
-    // référence vers la série
+  hotelId: string;
+  name: string;
 }
 
-const HotelSchema = new Schema<IHotel>(
-  {
+const HotelSchema = new Schema<IHotel> ({
     hotelId: { type: String, required: true },
     name: { type: String, required: true },
    

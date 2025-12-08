@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { CityCodeNameService } from '../../services/v3/CityCodeNameService';
-import CityCodeName from '../../models/v3/CityCodeName';
+import CityCodeName from '../../models/v3/CityCodeNameModel';
 import { HotelService } from '../../services/v3/HotelService';
 import { HotelLocationService } from '../../services/v3/HotelLocationService';
 
@@ -39,5 +39,21 @@ export class HotelLocationController {
       return res.status(500).json({ message: 'Erreur interne du serveur', error: error instanceof Error ? error.message : 'Erreur inconnue' });
     }
   }
+
+
+    public async updateHotelLocation(req:Request,res:Response):Promise<Response>{
+        const hotelId = req.params.id
+        console.log(hotelId)
+      try { 
+      
+        const hotelLocation = await HotelLocationService.updateHotelLocationService(hotelId as string,req.body);
+        return res.status(201).json({message:"The location of this hotel has been modified",hotelLocation})
+        
+      } catch (error:unknown) {
+        return res.status(401).json({message:"Unathorized action"})
+      }
+    }
+
+
 
 }

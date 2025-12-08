@@ -1,21 +1,20 @@
-// src/models/Season.ts
 import { Schema, model, Document, Types } from 'mongoose';
 
 export interface IHotelQuality extends Document {
-  hotelId: string;         // numéro de la saison
-  price : number,
-  rating : number,
-  ratioPriceQuality : number,
-    // référence vers la série
+  hotelId: string;
+  price : number;
+  rating : number;
+  ratioPriceQuality : number;
+  nbRating: number;
+  
 }
 
-const HotelSchema = new Schema<IHotelQuality>(
-  {
+const HotelSchema = new Schema<IHotelQuality> ({
     hotelId: { type: String,  ref: 'Hotel',  required: true },
     price: { type: Number, required: true },
     rating: { type: Number, required: true },
     ratioPriceQuality: { type: Number, required: true },
-    
+    nbRating: { type: Number, required: true },
    
   },
   { timestamps: true }

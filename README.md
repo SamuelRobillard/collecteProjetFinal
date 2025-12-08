@@ -17,7 +17,11 @@ collecte/
 ├── Postman
 └── src/
     ├── config/
-    │       # mettre le /env icic            
+    │       # mettre le /env ici
+                        puis -> develpment.env
+                        ou      production.env
+                        ou      test.env
+                                   
     │   
     │
     ├── controllers/         
@@ -52,6 +56,8 @@ cd collecte
 npm install
 
 
+
+
 dev: npm run dev 
 (utilisé celui ci pour postman)
 
@@ -61,7 +67,8 @@ prod: npm run start
 
 
 
-
+ps : préférence bash,
+si autre terminal, verifier que openssl est installé
 ---
 
 
