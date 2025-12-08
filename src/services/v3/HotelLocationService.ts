@@ -2,6 +2,7 @@
 
 
 import HotelLocation, { IHotelLocation } from "../../models/v3/HotelLocationModel";
+import FormatedStringRegex from "../../Regex/FormatedStringRegex";
 
 
 import { HttpError } from "../../utils/HttpError";
@@ -44,7 +45,7 @@ export class HotelLocationService {
     public static async getHotelLocationByCity(cityCodes: string[]): Promise<IHotelLocation[] | null> {
     try {
      
-      
+      cityCodes[0] = FormatedStringRegex.formatedString(cityCodes[0] as string);
       const hotels = await HotelLocation.find({ cityCode: { $in: cityCodes } });
       
       // If hotels are found, return them, else return null
