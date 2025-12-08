@@ -45,7 +45,7 @@ const win = require('./winston/winstonLogger')
 const app = express();
 const port = config.port;
 const logger = win;
-
+const isRender = !!process.env.RENDER;
 const isProduction = config.env === "production";
 
 // Middleware HTTPS uniquement en prod derrière proxy
@@ -90,40 +90,33 @@ app.get("/", (req: Request, res: Response) => {
 
 // Créer le serveur HTTPS
 
-if (config.env === "production") {
-  // Options SSL
+if (config.env === "production" && !isRender) {
+  // HTTPS local / serveur dédié
   const options = {
     key: fs.readFileSync(path.join("./", "key.pem")),
-    cert: fs.readFileSync(path.join("./", "cert.pem")),
+    cert: fs.readFileSync(path.join("./", "cert.pem"))
   };
 
-  // Serveur HTTPS
   https.createServer(options, app).listen(config.port, () => {
-    console.log(
-      `✅ Serveur HTTPS en prod sur https://localhost:${config.port}`
-    );
+    console.log(`✅ HTTPS Server running on https://localhost:${config.port}`);
   });
 
-  // Serveur HTTP redirection HTTPS
-  const httpPort = 80;
+  // Redirection HTTP → HTTPS
   http
     .createServer((req, res) => {
       res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
       res.end();
     })
-    .listen(httpPort, () => {
-      console.log(
-        `⚡ Serveur HTTP en prod sur http://localhost:${httpPort} → redirection HTTPS`
-      );
+    .listen(config.httpPort, () => {
+      console.log(`⚡ HTTP redirect running on http://localhost:${config.httpPort}`);
     });
 } else {
-  // http basic
+  // Render ou dev normal
   app.listen(config.port, () => {
-    console.log(
-      `🚀 Serveur ${config.env} en dev sur http://localhost:${config.port}`
-    );
+    console.log(`🚀 Server running on http://localhost:${config.port}`);
   });
 }
+
 
 const run = async () => {
   // // Connect to MongoDB

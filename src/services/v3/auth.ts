@@ -2,7 +2,7 @@
 import axios from 'axios';
 import config from "../../config/config";
 
-const clientIP = config.clientIp;
+const clientIP = config.clientId;
 const clientSecret = config.clientSecret;
 
 let accessToken: string | null = null;
