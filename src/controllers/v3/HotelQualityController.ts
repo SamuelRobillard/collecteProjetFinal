@@ -18,7 +18,7 @@ export class HotelQualityController {
         console.log(hotelId, price, rating)
         
         try {
-          const hotelQuality = await HotelQualityService.createHotelQuality(hotelId, price, rating);
+          const hotelQuality = await HotelQualityService.createHotelQuality(hotelId, price, rating,0,0);
           return res.status(201).json({ message: 'HotelQuality créé avec succès', hotelQuality });
         } catch (error: unknown) {
          return res.status(400).json({message : "probleme creation de hotelQuality"})

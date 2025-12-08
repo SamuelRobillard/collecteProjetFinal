@@ -1,5 +1,5 @@
 
-import { UserService } from '../services/user.service';
+import { UserService } from '../services/v1/user.service';
 
 test('should return all users', async () => {
   const users = await UserService.getAllUsers();
