@@ -107,4 +107,7 @@ export class HotelQualityService {
       throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
     }
   }
+
+
+  
 }

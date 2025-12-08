@@ -130,7 +130,10 @@ const run = async () => {
     console.log('Début de la création du CSV...');
     // await ToCsvService.createCsv(); // Utilise createCsv() au lieu de createHotelCsv()
     console.log('CSV créé avec succès!');
-    
+    // await StockHotelService.createHotelByCity("ams",10)
+    // await AccessDataService.getAllHotelDTo()
+    // await StockHotelService.fillBd()
+    console.log(await AccessDataService.getBestHotelPriceRatioByCity(["montreal"]))
   } catch (error) {
     console.error('Erreur:', error);
   }
@@ -141,7 +144,6 @@ run();
 
 // ApiCall.getPriceByListOfHotel(["HNPARKGU"])
 
-// StockHotelService.createHotelByPriceApi(["je suis faux ahhh faux"])
 
 
 // DataTransferService.combineAllDataForOneHotelById("WVYYZ096")

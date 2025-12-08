@@ -43,7 +43,8 @@ export class HotelLocationService {
 
     public static async getHotelLocationByCity(cityCodes: string[]): Promise<IHotelLocation[] | null> {
     try {
-      // Query the database to find hotel locations that match any cityCode in the cityCodes array
+     
+      
       const hotels = await HotelLocation.find({ cityCode: { $in: cityCodes } });
       
       // If hotels are found, return them, else return null
@@ -90,6 +91,9 @@ public static async getHotelLocationById(hotelId : string): Promise<IHotelLocati
       throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
     }
   }
+
+
+  
 
 }
 
