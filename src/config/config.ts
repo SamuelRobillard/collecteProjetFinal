@@ -11,6 +11,8 @@ const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
 
 const config = {
   env,
+  clientIp : process.env.CLIENT_ID,
+  clientSecret : process.env.CLIENT_SECRET,
   port: process.env.PORT || '3000',
   mongoUri: process.env.DB_URI || '',
   redirectHttpToHttps: settings.redirectHttpToHttps,

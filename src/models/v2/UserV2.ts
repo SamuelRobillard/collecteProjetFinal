@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import Media from '../Media';  // Importer la classe Media si nécessaire
+import Media from '../v1/Media';  // Importer la classe Media si nécessaire
 
 // Définition de l'interface pour User
 interface IUser extends Document {
