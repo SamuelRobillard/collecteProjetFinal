@@ -3,10 +3,8 @@ import { CityCodeNameController } from '../../controllers/v3/CityCodeNameControl
 import { ValidateCityCodeName } from '../../middleswares/v3/validateCityCodeName';
 import { CityCodeNameService } from '../../services/v3/CityCodeNameService';
 import { AccessDataController } from '../../controllers/v3/AccessDataController';
-
-
-
-
+import { authMiddleware } from '../../middleswares/authentificationMiddleswares';
+import { adminMiddleware } from '../../middleswares/adminMiddleware';
 
 const router = Router();
 const cityCodeNameController = new CityCodeNameController()
@@ -16,7 +14,7 @@ router.get('/citycodename', cityCodeNameController.getCityCodeName);
 // router.get('/CityCodeName/Name', cityCodeNameController.getAllEpisode);
 // router.get('/CityCodeName/Code', cityCodeNameController.getAllEpisode);
 // router.get('/users/:id/medias', userController.getAllMediaOfUser)
-router.post('/citycodename', ValidateCityCodeName, cityCodeNameController.createCityCodeName)
+router.post('/citycodename', authMiddleware, adminMiddleware, ValidateCityCodeName, cityCodeNameController.createCityCodeName)
 router.get('/cityName', accessDataController.getCityNames);
 
 
