@@ -22,6 +22,35 @@ export class AccessDataController {
     }
   }
 
+
+    public async getAllHotelDto(req: Request, res: Response): Promise<Response> {
+    try {
+                const dataInfo = await AccessDataService.getAllHotelDTo();
+                return res.status(201).json(dataInfo);
+        
+    } catch (error: unknown) {
+      return res.status(400).json({ message: "probleme getDataInfoByCity" });
+    }
+  }
+
+
+ public async getTop10HotelPriceRatioByCity(req: Request, res: Response): Promise<Response> {
+    try {
+
+        const {city}  = req.query;
+        if (typeof(city) == "string") {
+            const cityArrary : string[]= [city]
+            if (cityArrary !== undefined){
+                const dataInfo = await AccessDataService.getBestHotelPriceRatioByCity(cityArrary);
+                return res.status(201).json(dataInfo);
+            }
+        }
+        return res.status(404)
+    } catch (error: unknown) {
+      return res.status(400).json({ message: "probleme getBestHotelPriceRatioByCity" });
+    }
+  }
+
    public async getCityNames(req: Request, res: Response): Promise<Response> {
     
     try {

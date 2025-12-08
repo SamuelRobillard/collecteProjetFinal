@@ -37,6 +37,7 @@ import { HotelQualityService } from "./services/v3/HotelQualityService";
 import { DataTransferService } from "./services/v3/DataTransferService";
 import { ToCsvService } from "./services/v3/ToCsvService";
 import { AccessDataService } from "./services/v3/AccessDataService";
+import { CityCodeNameService } from "./services/v3/CityCodeNameService";
 
 const win = require('./winston/winstonLogger')
 
@@ -130,7 +131,10 @@ const run = async () => {
     console.log('Début de la création du CSV...');
     // await ToCsvService.createCsv(); // Utilise createCsv() au lieu de createHotelCsv()
     console.log('CSV créé avec succès!');
-    
+    // await StockHotelService.createHotelByCity("ams",10)
+    // await AccessDataService.getAllHotelDTo()
+    // await StockHotelService.fillBd()
+   console.log(await CityCodeNameService.getAllUniqueCityName())
   } catch (error) {
     console.error('Erreur:', error);
   }
@@ -141,7 +145,6 @@ run();
 
 // ApiCall.getPriceByListOfHotel(["HNPARKGU"])
 
-// StockHotelService.createHotelByPriceApi(["je suis faux ahhh faux"])
 
 
 // DataTransferService.combineAllDataForOneHotelById("WVYYZ096")

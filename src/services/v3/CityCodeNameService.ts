@@ -61,6 +61,29 @@ export class CityCodeNameService {
       throw new Error('Erreur lors de la récupération des citycCodeName: ' + error);
     }
   }
+  public static async getAllUniqueCityName(): Promise<string[] | null> {
+  try {
+    const cityNames = await CityCodeName.find().select("cityName -_id");
+
+    if (!cityNames || cityNames.length === 0) {
+      return null;
+    }
+
+    // Extract all names
+    const names = cityNames.map(c => c.cityName);
+
+    // Remove duplicates with a Set
+    const uniqueNames = [...new Set(names)];
+
+    return uniqueNames;
+
+  } catch (error) {
+    throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
+  }
+}
+
+
+
   public static async getCityNameByItsCode(cityCode : string): Promise<string | null> {
     try {
         cityCode = FormatedStringRegex.formatedString(cityCode)
@@ -75,7 +98,6 @@ export class CityCodeNameService {
       throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
     }
   }
-
 
 
   public static async getCityCodeByItsName(cityName : string): Promise<string[] | null> {

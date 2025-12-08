@@ -1,6 +1,8 @@
+import { r } from "@faker-js/faker/dist/airline-DF6RqYmq";
 import { IHotelQuality } from "../../models/v3/HotelQualityModel";
 import FormatedStringRegex from "../../Regex/FormatedStringRegex";
 import { ApiCall } from "./ApiCall";
+import { DataTransferService } from "./DataTransferService";
 import { HotelLocationService } from "./HotelLocationService";
 import { HotelQualityService } from "./HotelQualityService";
 import { HotelService } from "./HotelService";
@@ -70,16 +72,17 @@ export class StockHotelService {
 
               
               if (hotel.name && hotel.hotelId && hotel.geoCode && hotel.address) {
-                console.log(`Nom de l'hôtel: ${hotel.name}`);
+                
                 if(!FormatedStringRegex.isTestInName(hotel.name)){
-                  console.log(`Nom de l'hôtel: ${hotel.name}`  + "saved");
+                  console.log(`Nom de l'hôtel: ${hotel.address}`  + "saved");
                   
                   
                   await HotelService.createHotel(hotel.hotelId, hotel.name);
                   await HotelLocationService.createHotelLocation(
                     hotel.hotelId,
-                    hotel.address.countryCode, 
                     FormatedStringRegex.formatedString(hotel.address.cityName),
+                    hotel.address.countryCode, 
+                    
                     hotel.geoCode.latitude,
                     hotel.geoCode.longitude
                   );
@@ -138,16 +141,44 @@ export class StockHotelService {
               HotelQualityService.updateHotelQualityService(response[0], updateData)
           }
           else{
-            const updateData: Partial<IHotelQuality> = {
+
+            const hotelAlreadyExists = await DataTransferService.combineAllDataForOneHotelById(listHotelArray[0] as string)
+
+            await HotelQualityService.createHotelQuality(listHotelArray[0] as string, 0, 0,0,0)
+            if(hotelAlreadyExists !== null){
+              const numAleatoire =  (Number)(faker.commerce.price({min : 1, max : 5, dec : 0}))
+              const isPositif =  (Number)(faker.commerce.price({min : 1, max : 2, dec : 0}))
+              const numPourcentage = numAleatoire  / 100
+              let numAMultiplier;
+              isPositif == 1 ? numAMultiplier = 1 + numPourcentage : numAMultiplier = 1 - numPourcentage
+              const numAMultiplierNbRating = 1 + numPourcentage
+
+
+              console.log("voici les nombres " + numAMultiplier)
+              const updateData: Partial<IHotelQuality> = {
+              
+              price: hotelAlreadyExists.price * numAMultiplier,
+              rating: hotelAlreadyExists.rating * numAMultiplier,
+              nbRating: hotelAlreadyExists.nbRating * numAMultiplierNbRating
+            };
+
+            await HotelQualityService.updateHotelQualityService(listHotelArray[0] as string, updateData)
+            }
+            else{
+              const updateData: Partial<IHotelQuality> = {
               
               price: (Number)(faker.commerce.price({min : 50, max : 1500})),  // nouveau prix
               rating: (Number)(faker.commerce.price({min : 10, max : 100, dec : 0})),
               nbRating: (Number)(faker.commerce.price({min : 10, max : 400, dec : 0})),
             };
-            console.log(updateData)
-            await HotelQualityService.createHotelQuality(listHotelArray[0] as string, 0, 0,0,0)
-            
+
             await HotelQualityService.updateHotelQualityService(listHotelArray[0] as string, updateData)
+            }
+           
+          
+            
+            
+            
           }
        
           

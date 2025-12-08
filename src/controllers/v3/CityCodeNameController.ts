@@ -23,7 +23,18 @@ export class CityCodeNameController {
 
 
   
- 
+  public async getAllUniqueName(req: Request, res: Response): Promise<Response> {
+   
+   
+    
+    try {
+      const cityNames = await CityCodeNameService.getAllUniqueCityName();
+      return res.status(201).json(cityNames);
+    } catch (error: unknown) {
+     return res.status(400).json({message : "probleme recuperation de nom unique"})
+    
+  }}
+
 
   public async getCityCodeName(req: Request, res: Response): Promise<Response> {
     const { cityCode, cityName } = req.query;  // Les paramètres sont dans req.query
