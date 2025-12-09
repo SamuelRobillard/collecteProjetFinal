@@ -1,34 +1,73 @@
-import DataTransferHotelInfo from "../../models/v3/DataTransferHotelInfo";
 import { DataTransferService } from "./DataTransferService";
 import { HotelService } from "./HotelService";
 import * as fastcsv from "fast-csv";
 import * as fs from "fs";
+import Booking from "../../models/v3/BookingModel";
 
 export class ToCsvService {
-    public static async createHotelCsv(): Promise<any> {
-
+    public static async createHotelCsv(): Promise<any[]> {
         const allId = await HotelService.getAllHotelId();
 
-        if (allId === null)
-            throw new Error("Nothing found");
+        if (!allId || allId.length === 0) {
+            console.warn("No hotel IDs found");
+            return [];
+        }
 
-        const result = await Promise.all(allId.map(async e => await DataTransferService.combineAllDataForOneHotelById(e)));
+        const rawData = await Promise.all(
+            allId.map((id) => DataTransferService.combineAllDataForOneHotelById(id))
+        );
 
-        return result
+        const validData = rawData.filter(
+            (item): item is NonNullable<typeof item> => item !== null && item !== undefined
+        );
+
+        if (validData.length === 0) {
+            console.warn("No complete hotel data available after filtering");
+        }
+
+        return validData;
     }
 
-    public static async createCsv(): Promise<any>  {
-        const dataTransferHotelInfo = await this.createHotelCsv();
+    public static async createBookingCsv(): Promise<any[]> {
+        const bookings = await Booking.find({}).lean().exec();
+
+        if (!bookings || bookings.length === 0) {
+            return [];
+        }
+
+        return bookings.map((b) => ({
+            bookingId: b._id.toString(),
+            userId: b.userId.toString(),
+            hotelId: b.hotelId,
+            dateStart: b.dateStart,
+            dateEnd: b.dateEnd,
+            nbRooms: b.nbRooms,
+        }));
+    }
+
+    public static async createHotelsCsvFile(): Promise<void> {
+        const data = await this.createHotelCsv();
         const filePath = "hotels.csv";
         const ws = fs.createWriteStream(filePath);
-        
-        fastcsv.write(dataTransferHotelInfo, { headers: true })
+
+        fastcsv
+            .write(data, { headers: true })
             .pipe(ws)
-            .on('finish', () => {
-                console.log(`CSV file has been saved to ${filePath} using fast-csv.`);
+            .on("finish", () => console.log(`Hotels CSV saved: ${filePath}`))
+            .on("error", (err) => console.error("Error writing hotels CSV:", err));
+    }
+
+    public static async createBookingsCsvFile(): Promise<void> {
+        const data = await this.createBookingCsv();
+        const filePath = "bookings.csv";
+        const ws = fs.createWriteStream(filePath);
+
+        fastcsv
+            .write(data, {
+                headers: ["bookingId", "userId", "hotelId", "dateStart", "dateEnd", "nbRooms"],
             })
-            .on('error', (err) => {
-                console.error('Error writing to CSV file with fast-csv', err);
-            });
+            .pipe(ws)
+            .on("finish", () => console.log(`Bookings CSV saved: ${filePath}`))
+            .on("error", (err) => console.error("Error writing bookings CSV:", err));
     }
 }
