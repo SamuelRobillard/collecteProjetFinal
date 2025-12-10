@@ -10,12 +10,15 @@ export class BookingService {
     dateEnd: string,
     nbRooms: number
   ): Promise<any> {
+    const totalDay = this.calculateDaysBetweenDates(dateStart, dateEnd);
+    
     const booking = new Booking({
       hotelId,
       userId,
       dateStart,
       dateEnd,
       nbRooms,
+      totalDay
     });
 
     try {
@@ -30,10 +33,10 @@ export class BookingService {
         await booking.save();
         
         
-        const daysBetween = this.calculateDaysBetweenDates(dateStart, dateEnd);
+      
         
         
-        return { booking: booking, daysBetween };
+        return { booking: booking };
       }
     } catch (error) {
       throw new Error("Error while creating booking: " + error);
@@ -52,6 +55,22 @@ export class BookingService {
       throw new Error("Error fetching bookings by user ID: " + error);
     }
   }
+
+  public static async getBookingsIdByUserId(userId: string): Promise<string[] | null> {
+    try {
+            const hotels = await  Booking.find({ userId: userId }).select("hotelId");
+            if(hotels != null){
+                return hotels.map(e => e.hotelId); 
+            }
+    
+            return null
+          
+          
+        } catch (error) {
+          throw new Error('Erreur lors de la récupération des cityCodeName: ' + error);
+        }
+      }
+  
 
   public static async deleteBookingByHotelId(hotelId: string) {
     try {

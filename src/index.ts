@@ -129,10 +129,11 @@ const run = async () => {
     console.log('MongoDB connecté avec succès!');
     // MAINTENANT tu peux appeler ToCsvService
     console.log('Début de la création du CSV...');
-    await ToCsvService.createHotelsCsvFile(); // Utilise createCsv() au lieu de createHotelCsv()
-    await ToCsvService.createBookingsCsvFile();
+    // await ToCsvService.createHotelsCsvFile(); // Utilise createCsv() au lieu de createHotelCsv()
+    // await ToCsvService.createBookingsCsvFile();
     console.log('CSV créé avec succès!');
-    // await StockHotelService.createHotelByCity("ams",10)
+   await DataTransferService.combineAllDataForOneHotelForBookingById("692decdb644b62fe2d2c3e9a")
+    // await StockHotelService.createHotelByCity("ams",10
     // await AccessDataService.getAllHotelDTo()
     // await StockHotelService.fillBd()
    console.log(await CityCodeNameService.getAllUniqueCityName())

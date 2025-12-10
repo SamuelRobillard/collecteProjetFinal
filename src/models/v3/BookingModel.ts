@@ -6,6 +6,7 @@ export interface IBooking extends Document {
   dateStart:string;
   dateEnd: string;
   nbRooms: number;
+  totalDay: number;
 }
 
 const BookingSchema = new Schema<IBooking> ({
@@ -14,6 +15,7 @@ const BookingSchema = new Schema<IBooking> ({
     dateStart: { type: String, required: true },
     dateEnd: { type: String, required: true },
     nbRooms: { type: Number, required: true },
+    totalDay: { type: Number, required: true },
   },
   { timestamps: true }
 );
