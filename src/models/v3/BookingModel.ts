@@ -1,9 +1,9 @@
-import { Schema, model, Document, Types } from 'mongoose';
+import { Schema, model, Document, Types, Date } from 'mongoose';
 
 export interface IBooking extends Document {
   hotelId: string;
   userId: Types.ObjectId;
-  dateStart: string;
+  dateStart:string;
   dateEnd: string;
   nbRooms: number;
 }
