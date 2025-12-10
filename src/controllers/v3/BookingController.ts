@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { BookingService } from "../../services/v3/BookingService";
 import { homedir } from "os";
+import { AccessDataService } from "../../services/v3/AccessDataService";
+import { DataTransferService } from "../../services/v3/DataTransferService";
 
 export class BookingController {
   public async createBooking(req: Request, res: Response): Promise<Response> {
@@ -28,7 +30,7 @@ export class BookingController {
 
     try {
       // Si l'utilisateur a filtré par cityName, on retourne le cityCode
-      const code = await BookingService.getBookingsByUserId(userId as string);
+      const code = await DataTransferService.combineAllDataForOneHotelForBookingById(userId as string)
       if (code) {
         return res.status(200).json({ cityCode: code });
       } else {
