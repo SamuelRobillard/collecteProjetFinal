@@ -13,6 +13,8 @@ import swaggerDocument from "./swagger/swaggerApi1.json";
 import swaggerDocumentV2 from "./swagger/swaggerApi2.json";
 import http from "http";
 import connectDB from "./data/DbMongo";
+// Use require to avoid missing type definitions for cors
+const cors = require("cors");
 import MovieRouteV2 from "./routes/v2/MovieV2.route";
 import SerieRouteV2 from "./routes/v2/SerieRouteV2";
 import SeasonRouteV2 from "./routes/v2/SeasonRouteV2";
@@ -52,6 +54,7 @@ const isProduction = config.env === "production";
 // Middleware HTTPS uniquement en prod derrière proxy
 
 app.use(express.json());
+app.use(cors());
 
 // app.use("/api/v1", userRoutes);
 // app.use("/api/v1", mediaRoute);
@@ -129,10 +132,10 @@ const run = async () => {
     console.log('MongoDB connecté avec succès!');
     // MAINTENANT tu peux appeler ToCsvService
     console.log('Début de la création du CSV...');
-    // await ToCsvService.createHotelsCsvFile(); // Utilise createCsv() au lieu de createHotelCsv()
-    // await ToCsvService.createBookingsCsvFile();
+     await ToCsvService.createHotelsCsvFile(); // Utilise createCsv() au lieu de createHotelCsv()
+     await ToCsvService.createBookingsCsvFile();
     console.log('CSV créé avec succès!');
-   await DataTransferService.combineAllDataForOneHotelForBookingById("692decdb644b62fe2d2c3e9a")
+   //await DataTransferService.combineAllDataForOneHotelForBookingById("692decdb644b62fe2d2c3e9a")
     // await StockHotelService.createHotelByCity("ams",10
     // await AccessDataService.getAllHotelDTo()
     // await StockHotelService.fillBd()

@@ -23,6 +23,48 @@ export class AccessDataController {
   }
 
 
+  public async getHotelsCsv(req: Request, res: Response): Promise<Response> {
+    try {
+      // utiliser require pour compatibilité CommonJS
+      const fs = require('fs');
+      const path = require('path');
+
+      const csvPath = path.resolve(process.cwd(), 'hotels.csv');
+      if (!fs.existsSync(csvPath)) {
+        return res.status(404).json({ message: 'hotels.csv introuvable' });
+      }
+
+      const raw = fs.readFileSync(csvPath, 'utf-8');
+      const lines = raw.split(/\r?\n/).filter((l: string) => l.trim().length > 0);
+      if (lines.length <= 1) {
+        return res.status(200).json([]);
+      }
+
+      const headers = lines[0].split(',');
+      const rows = lines.slice(1).map((line: string) => {
+        const cols = line.split(',');
+        const obj: any = {};
+      headers.forEach((h: string, i: number) => {
+        obj[h] = cols[i];
+      });
+
+
+        
+        // typage simple
+        if (obj.rating !== undefined) obj.rating = Number(obj.rating);
+        if (obj.nbRating !== undefined) obj.nbRating = Number(obj.nbRating);
+        if (obj.price !== undefined) obj.price = Number(obj.price);
+        if (obj.ratioPriceQuality !== undefined) obj.ratioPriceQuality = Number(obj.ratioPriceQuality);
+        return obj;
+      });
+
+      return res.status(200).json(rows);
+    } catch (error) {
+      return res.status(500).json({ message: 'Erreur lecture hotels.csv' });
+    }
+  }
+
+
     public async getAllHotelDto(req: Request, res: Response): Promise<Response> {
     try {
                 const dataInfo = await AccessDataService.getAllHotelDTo();
