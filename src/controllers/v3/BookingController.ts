@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { BookingService } from "../../services/v3/BookingService";
 import { homedir } from "os";
+import { AccessDataService } from "../../services/v3/AccessDataService";
+import { DataTransferService } from "../../services/v3/DataTransferService";
+import { AuthRequest } from "../../middleswares/authentificationMiddleswares";
 
 export class BookingController {
   public async createBooking(req: Request, res: Response): Promise<Response> {
@@ -28,9 +31,9 @@ export class BookingController {
 
     try {
       // Si l'utilisateur a filtré par cityName, on retourne le cityCode
-      const code = await BookingService.getBookingsByUserId(userId as string);
+      const code = await DataTransferService.combineAllDataForOneHotelForBookingById(userId as string)
       if (code) {
-        return res.status(200).json({ cityCode: code });
+        return res.status(200).json({ bookings: code });
       } else {
         return res
           .status(404)
@@ -46,12 +49,13 @@ export class BookingController {
   }
 
 
-  public async deleteBookingByHotelId(req:Request,res:Response):Promise<void>{
+  public async deleteBookingByHotelId(req:AuthRequest,res:Response):Promise<void>{
     const {hotelId} = req.query;
-
+    const userId = req.user.id
+    console.log(userId)
     try {     
         if(hotelId != undefined)
-        await BookingService.deleteBookingByHotelId(hotelId as string)
+        await BookingService.deleteBookingByHotelIdAndUserId(hotelId as string, userId)
         res.status(204).send(); 
        }
      catch (error:unknown) {

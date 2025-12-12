@@ -1,11 +1,12 @@
-import { Schema, model, Document, Types } from 'mongoose';
+import { Schema, model, Document, Types, Date } from 'mongoose';
 
 export interface IBooking extends Document {
   hotelId: string;
   userId: Types.ObjectId;
-  dateStart: string;
+  dateStart:string;
   dateEnd: string;
   nbRooms: number;
+  totalDay: number;
 }
 
 const BookingSchema = new Schema<IBooking> ({
@@ -14,6 +15,7 @@ const BookingSchema = new Schema<IBooking> ({
     dateStart: { type: String, required: true },
     dateEnd: { type: String, required: true },
     nbRooms: { type: Number, required: true },
+    totalDay: { type: Number, required: true },
   },
   { timestamps: true }
 );

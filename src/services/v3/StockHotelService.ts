@@ -1,4 +1,4 @@
-import { r } from "@faker-js/faker/dist/airline-DF6RqYmq";
+
 import { IHotelQuality } from "../../models/v3/HotelQualityModel";
 import FormatedStringRegex from "../../Regex/FormatedStringRegex";
 import { ApiCall } from "./ApiCall";

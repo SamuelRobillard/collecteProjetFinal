@@ -15,4 +15,4 @@ router.get('/hotelsbestratioprice', accessDataController.getTop10HotelPriceRatio
 
 router.put('/hotelsLocation/:id', authMiddleware, adminMiddleware, hotelLocationController.updateHotelLocation)
 
-export default router;
+export default router;    

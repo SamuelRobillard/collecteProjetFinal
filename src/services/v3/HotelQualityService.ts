@@ -1,7 +1,5 @@
-import { Types } from "mongoose";
-import Hotel from "../../models/v3/HotelModel";
+
 import HotelQuality, { IHotelQuality } from "../../models/v3/HotelQualityModel";
-import { HttpError } from "../../utils/HttpError";
 
 
 export class HotelQualityService {
