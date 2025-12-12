@@ -1,5 +1,4 @@
-import { readDataUser, writeDataUser } from "../../utils/jsonHandlerUser";
-import { readData, writeData } from "../../utils/jsonHandler";
+
 import { IUser } from "../../models/v3/UserModel";
 import bcrypt from "bcryptjs";
 import { Types } from "mongoose";

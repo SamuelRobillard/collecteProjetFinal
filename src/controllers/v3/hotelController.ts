@@ -43,7 +43,7 @@ export class HotelController {
         if (code) {
           return res.status(200).json({ cityCode: code });
         } else {
-          return res.status(404).json({ message: `Aucun cityCode trouvé pour la ville ${hotelId}` });
+          return res.status(404).json({ message: `Aucun hotel trouvé pour le id ${hotelId}` });
         }
 
     } catch (error: unknown) {

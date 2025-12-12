@@ -84,6 +84,21 @@ export class BookingService {
       throw new Error("Unable to delete booking for this hotel: " + error);
     }
   }
+  public static async deleteBookingByHotelIdAndUserId(hotelId: string, userId : string) {
+    try {
+     
+
+   
+        const booking = await Booking.findOneAndDelete({ 
+          hotelId: hotelId,
+          userId : userId
+        });
+        return booking;
+      
+    } catch (error) {
+      throw new Error("Unable to delete booking for this hotel: " + error);
+    }
+  }
 
 
   public static calculateDaysBetweenDates(dateStart: string, dateEnd: string): number {
