@@ -1,7 +1,5 @@
-# TV-Tracker
-
-TV-Tracker est une application backend fait avec nodejs 
-qui permet de gerer des donnes relier a une application de streaming de film et srie 
+# Hotel API
+ 
 
 ---
 
@@ -9,7 +7,7 @@ qui permet de gerer des donnes relier a une application de streaming de film et 
 
 
 
-git clone -b integrationMongo https://github.com/SamuelRobillard/collecte
+git clone https://github.com/SamuelRobillard/collecteProjetFinal
 
 ```
 collecte/
