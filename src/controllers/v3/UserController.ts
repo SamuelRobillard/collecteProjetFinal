@@ -67,7 +67,7 @@ export class UserController {
 
   public async createUser(req: Request, res: Response): Promise<Response> {
     const { firstName, lastName, email, password} = req.body;
-
+    console.log(firstName, lastName, email, password)
     // Vérification si le mot de passe est fourni
     if (!password) {
       return res.status(400).json({ message: "Le mot de passe est requis." });
