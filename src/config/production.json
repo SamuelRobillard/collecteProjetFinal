@@ -19,7 +19,7 @@
         "expiresIn": "1h"
       },
       "cors": {
-        "origins": ["https://myproductiondomain.com"]
+        "origins": ["https://collecteprojetfinal.onrender.com"]
       },
       "rateLimit": {
         "windowMs": 90000,

@@ -5,8 +5,7 @@ import path from "path";
 import swaggerUi from "swagger-ui-express";
 import http from "http";
 import connectDB from "./data/DbMongo";
-// Use require to avoid missing type definitions for cors
-const cors = require("cors");
+import cors, { CorsOptions } from "cors";
 
 import config from "./config/config";
 
@@ -18,10 +17,8 @@ import UserRoute from "./routes/v3/UserRoute"
 import CityCodeNameRoute from './routes/v3/CityCodeNameRoute';
 import { ToCsvService } from "./services/v3/ToCsvService";
 import { CityCodeNameService } from "./services/v3/CityCodeNameService";
-import swaggerDocument3  from "./swagger/swaggerApi3.json"
+import swaggerDocument3 from "./swagger/swaggerApi3.json"
 const win = require('./winston/winstonLogger')
-
-
 
 const app = express();
 const port = config.port;
@@ -32,8 +29,24 @@ const isProduction = config.env === "production";
 // Middleware HTTPS uniquement en prod derrière proxy
 
 app.use(express.json());
-app.use(cors());
 
+const corsOptions: CorsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (Postman, mobile apps, curl)
+    if (!origin) return callback(null, true);
+
+    if (config.allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 
 
 app.use("/api/v3", CityCodeNameRoute);
@@ -93,13 +106,13 @@ const run = async () => {
     console.log('Connexion à MongoDB...');
     await connectDB();
     console.log('MongoDB connecté avec succès!');
-    
-    
+
+
 
     //  await ToCsvService.createHotelsCsvFile(); 
     //  await ToCsvService.createBookingsCsvFile();
-   
- 
+
+
     // await StockHotelService.fillBd()
 
 
@@ -109,9 +122,3 @@ const run = async () => {
   }
 };
 run();
-
-
-
-
-
-

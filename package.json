@@ -36,5 +36,8 @@
     "typescript": "^5.9.2",
     "uuid": "^13.0.0",
     "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19"
   }
 }
