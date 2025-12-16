@@ -39,6 +39,12 @@ export default class FormatedStringRegex {
 
     }
 
+    static strongPassword(string: string): boolean {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+        return regex.test(string);
+    }
+
     static isTestInName(string: string): boolean {
         const regex = /test/gi;  
         return regex.test(string);   

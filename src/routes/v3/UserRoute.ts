@@ -6,12 +6,13 @@ import { authMiddleware, AuthRequest } from "../../middleswares/authentification
 import { adminMiddleware } from "../../middleswares/adminMiddleware";
 import UserModel from "../../models/v3/UserModel";
 import DTOUser from "../../models/v3/DTOUser";
+import { ValidatePassword } from "../../middleswares/v3/validatePassword";
 const router = Router();
 const userController = new UserController();
 
-router.post("/user", userController.createUser);
+router.post("/user", ValidatePassword, userController.createUser);
 
-router.post("/admin", adminMiddleware, userController.createAdmin);
+router.post("/admin", ValidatePassword, adminMiddleware, userController.createAdmin);
 
 const loginLimiter = createRateLimiter('/api/v3/login');
 if (loginLimiter) router.post('/login', loginLimiter, userController.login);
