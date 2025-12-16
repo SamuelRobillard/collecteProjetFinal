@@ -19,7 +19,7 @@
         "expiresIn": "1h"
       },
       "cors": {
-        "origins": ["http://localhost:3000"]
+        "origins": ["http://localhost:3000", "https://collecteprojetfinal.onrender.com"]
       },
       "rateLimit": {
         "windowMs": 90000,
