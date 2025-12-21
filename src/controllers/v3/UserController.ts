@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, response, Response } from "express";
 import { UserService } from "../../services/v3/UserService";
 import { HttpError } from "../../utils/HttpError";
 import { AuthRequest } from "../../middleswares/authentificationMiddleswares";
@@ -65,11 +65,12 @@ export class UserController {
     }
   }
 
-  public async createUser(req: Request, res: Response): Promise<Response> {
+  public async createUser(req: Request, res: Response, next : NextFunction): Promise<Response | undefined>{
     const { firstName, lastName, email, password} = req.body;
     console.log(firstName, lastName, email, password)
     // Vérification si le mot de passe est fourni
     if (!password) {
+      
       return res.status(400).json({ message: "Le mot de passe est requis." });
     }
 
@@ -86,12 +87,14 @@ export class UserController {
         .json({ message: "Utilisateur créé avec succès", user });
     } catch (error: unknown) {
       if (error instanceof HttpError) {
-        return res.status(error.statusCode).json({ message: error.message });
-        // Vérifie ici que le message est bien passé
+        next(error)
+       
+        
       } else {
         // Si l'erreur n'est pas de type Error, on renvoie une réponse générique
         console.error("Erreur inconnue:", error);
-        return res.status(500).json({ message: "Erreur inconnue" });
+        next(error)
+        
       }
     }
   }

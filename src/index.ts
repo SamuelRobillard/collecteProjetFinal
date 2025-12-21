@@ -19,6 +19,7 @@ import { ToCsvService } from "./services/v3/ToCsvService";
 import { CityCodeNameService } from "./services/v3/CityCodeNameService";
 import swaggerDocument3 from "./swagger/swaggerApi3.json"
 const win = require('./winston/winstonLogger')
+const winError = require('./winston/winstonError')
 
 const app = express();
 const port = config.port;
@@ -26,13 +27,26 @@ const logger = win;
 const isRender = !!process.env.RENDER;
 const isProduction = config.env === "production";
 
+
+
+app.use((req, res, next) => {
+  logger.info(`${req.method} ${req.url}`);
+  
+  next();
+});
+
+app.use((err: any, req: Request, res: Response, next: any) => {
+  winError.error(err);
+  res.status(500).json({ message: 'Erreur interne du serveur' });
+});
+
 // Middleware HTTPS uniquement en prod derrière proxy
 
 app.use(express.json());
 
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin (Postman, mobile apps, curl)
+   
     if (!origin) return callback(null, true);
 
     if (config.allowedOrigins.includes(origin)) {
