@@ -1,0 +1,9 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 30  
+      arrivalRate: 15
+scenarios:
+  - flow:
+      - get:
+          url: "/api/v3/hotelsLocationByCity"
