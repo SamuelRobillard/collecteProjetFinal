@@ -154,4 +154,28 @@ export class UserController {
       
       
   }
+
+  public async adminDeleteUser(req:AuthRequest,res:Response):Promise<void>{
+    
+
+      const id = req.params.id
+      
+     
+      try {     
+          
+            await UserService.deleteUser(id as string)
+            
+            res.status(204).send(); 
+          }
+         
+         
+       catch (error:unknown) {
+         res.status(404).json({
+          message: "L'id de l'hôtel n'existe pas",
+          error: error instanceof Error ? error.message : "Erreur inconnue",
+        });
+      }
+      
+      
+  }
 }

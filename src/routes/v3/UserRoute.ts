@@ -47,4 +47,5 @@ router.get('/me', authMiddleware, async (req: AuthRequest, res: Response) => {
 
 
 router.delete("/user", authMiddleware, userController.deleteUserToken);
+router.delete("/admin/user/:id", authMiddleware,adminMiddleware,  userController.adminDeleteUser);
 export default router;
