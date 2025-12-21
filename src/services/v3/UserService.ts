@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { Types } from "mongoose";
 import { HttpError } from "../../utils/HttpError";
 import User from "../../models/v3/UserModel";
+import { error } from "console";
 
 export class UserService {
   public static async createUser(
