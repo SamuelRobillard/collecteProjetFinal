@@ -129,4 +129,29 @@ export class UserController {
       }
     }
   }
+
+
+   public async deleteUserToken(req:AuthRequest,res:Response):Promise<void>{
+    
+
+      const userId = req.user.id
+      console.log(userId)
+     
+      try {     
+          
+            await UserService.deleteUser(userId)
+            
+            res.status(204).send(); 
+          }
+         
+         
+       catch (error:unknown) {
+         res.status(404).json({
+          message: "L'id de l'hôtel n'existe pas",
+          error: error instanceof Error ? error.message : "Erreur inconnue",
+        });
+      }
+      
+      
+  }
 }

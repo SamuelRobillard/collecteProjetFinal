@@ -85,4 +85,20 @@ export class UserService {
       );
     }
   }
+
+  public static async deleteUser(id: string): Promise<IUser | null> {
+   try {
+        
+   
+      
+           const user = await User.findOneAndDelete({ 
+            _id: id,
+            
+           });
+           return user;
+         
+       } catch (error) {
+         throw new Error("Unable to delete user : " + error);
+       }
+  }
 }
