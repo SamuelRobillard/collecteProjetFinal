@@ -29,6 +29,8 @@ export class UserController {
   }
 
   public async login(req: Request, res: Response): Promise<void> {
+    try{
+    console.log("info login " + req.body.email + "asdsd" +  req.body.password);
     const users: IUser[] = await UserService.getAllUsers();
     const user = users.find((user) => user.email === req.body.email);
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
@@ -47,6 +49,10 @@ export class UserController {
       res.json({ accessToken });
     } else {
       res.status(403).send("email ou mot de passe incorrect");
+    }
+    }
+    catch(error){
+      res.status(500).json({ message: "Erreur interne du serveur" });
     }
   }
 
