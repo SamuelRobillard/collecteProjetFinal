@@ -305,7 +305,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Identifiant de l'hôtel associé à la réservation"
+            "description": "La ville des tous les hôtels"
           }
         ]
       }

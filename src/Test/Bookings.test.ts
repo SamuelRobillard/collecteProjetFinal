@@ -84,7 +84,7 @@ describe('BookingService.getBookingsByUserId', () => {
   });
 
   it('should return null if no bookings found', async () => {
-    mockedBooking.find.mockResolvedValue(null);
+    mockedBooking.find.mockResolvedValue(null as never);
 
     const result = await BookingService.getBookingsByUserId('1022020');
 
@@ -102,7 +102,7 @@ describe('BookingService.getBookingsIdByUserId', () => {
     ];
 
     mockedBooking.find.mockReturnValue({
-      select: jest.fn().mockResolvedValue(fakeHotels)
+      select: jest.fn().mockResolvedValue(fakeHotels as never)
     } as any);
 
     const result = await BookingService.getBookingsIdByUserId('1022020');
@@ -113,7 +113,7 @@ describe('BookingService.getBookingsIdByUserId', () => {
 
   it('should return null if no bookings found', async () => {
     mockedBooking.find.mockReturnValue({
-      select: jest.fn().mockResolvedValue(null)
+      select: jest.fn().mockResolvedValue(null as never)
     } as any);
 
     const result = await BookingService.getBookingsIdByUserId('1022020');

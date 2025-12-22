@@ -23,12 +23,12 @@ describe('UserService.createUser', () => {
     };
 
     mockedUser.findOne.mockResolvedValue(null);
-    mockedBcrypt.hash.mockResolvedValue('hashedPassword123' as any);
+    mockedBcrypt.hash.mockResolvedValue('hashedPassword123' as never);
 
     const MockedUserConstructor = mockedUser as unknown as jest.Mock;
     MockedUserConstructor.mockImplementation(function (this: any, doc: any) {
       Object.assign(this, doc);
-      this.save = jest.fn().mockResolvedValue(this);
+      this.save = jest.fn().mockResolvedValue(this as never);
       return this;
     });
 
@@ -77,7 +77,7 @@ describe('UserService.updateUser', () => {
       role: 'admin'
     };
 
-    mockedBcrypt.hash.mockResolvedValue('newHashedPassword' as any);
+    mockedBcrypt.hash.mockResolvedValue('newHashedPassword' as never);
     mockedUser.findByIdAndUpdate.mockResolvedValue(updatedUser as any);
 
     const result = await UserService.updateUser('507f1f77bcf86cd799439011', {
@@ -104,7 +104,7 @@ describe('UserService.updateUser', () => {
       role: 'user'
     };
 
-    mockedBcrypt.hash.mockResolvedValue('newHashedPassword' as any);
+    mockedBcrypt.hash.mockResolvedValue('newHashedPassword' as never);
     mockedUser.findByIdAndUpdate.mockResolvedValue(updatedUser as any);
 
     const result = await UserService.updateUser('507f1f77bcf86cd799439011', {
