@@ -12,7 +12,7 @@ const userController = new UserController();
 
 router.post("/user", ValidatePassword, userController.createUser);
 
-router.post("/admin", ValidatePassword, adminMiddleware, userController.createAdmin);
+router.post("/admin", ValidatePassword, authMiddleware, adminMiddleware, userController.createAdmin);
 
 const loginLimiter = createRateLimiter('/api/v3/login');
 if (loginLimiter) router.post('/login', loginLimiter, userController.login);
