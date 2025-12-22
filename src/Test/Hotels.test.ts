@@ -1,9 +1,11 @@
 import { describe, it, expect, jest } from '@jest/globals';
 import { HotelService } from '../services/v3/HotelService';
-import HotelModel from '../models/v3/HotelModel';
+import Hotel from '../models/v3/HotelModel';
 
 jest.mock('../models/v3/HotelModel');
-const mockedHotel = HotelModel as jest.Mocked<typeof HotelModel>;
+const mockedHotel = Hotel as jest.Mocked<typeof Hotel>;
+
+type HotelIdOnly = { hotelId: string };
 
 describe('HotelService.createHotel', () => {
   it('create or update a hotel', async () => {
@@ -16,15 +18,35 @@ describe('HotelService.createHotel', () => {
 
     const result = await HotelService.createHotel('hotel1234', 'Test Hotel');
 
-    expect(mockedHotel.findOneAndUpdate).toHaveBeenCalled();
+    expect(mockedHotel.findOneAndUpdate).toHaveBeenCalledWith(
+      { hotelId: 'hotel1234' },
+      { $set: { hotelId: 'hotel1234', name: 'Test Hotel' } },
+      { new: true, upsert: true }
+    );
     expect(result.hotel).toEqual(fakeHotel);
   });
 });
 
+describe('HotelService.getHotelById', () => {
+  it('should return the hotel if found', async () => {
+    const fakeHotel: HotelIdOnly = { hotelId: 'h1' };
 
+    mockedHotel.findOne.mockResolvedValue(fakeHotel as any);
 
+    const result = await HotelService.getHotelById('h1');
 
-type HotelIdOnly = { hotelId: string };
+    expect(mockedHotel.findOne).toHaveBeenCalledWith({ hotelId: 'h1' });
+    expect(result).toEqual(fakeHotel);
+  });
+
+  it('should return null if not found', async () => {
+    mockedHotel.findOne.mockResolvedValue(null as any);
+
+    const result = await HotelService.getHotelById('h1');
+
+    expect(result).toBeNull();
+  });
+});
 
 describe('HotelService.getAllHotelId', () => {
   it('should return an array of hotelIds', async () => {
@@ -34,7 +56,6 @@ describe('HotelService.getAllHotelId', () => {
       { hotelId: 'h3' },
     ];
 
-    
     const mockSelect = jest.fn().mockResolvedValue(fakeHotels as never);
 
     mockedHotel.find.mockReturnValue({
@@ -44,21 +65,19 @@ describe('HotelService.getAllHotelId', () => {
     const result = await HotelService.getAllHotelId();
 
     expect(mockedHotel.find).toHaveBeenCalled();
+    expect(mockSelect).toHaveBeenCalledWith('hotelId');
     expect(result).toEqual(['h1', 'h2', 'h3']);
   });
-});
 
+  it('should return null if find returns null', async () => {
+    const mockSelect = jest.fn().mockResolvedValue(null as never);
 
-describe('HotelService.getHotelById', () => {
-  it('should return the hotel if found', async () => {
-    const fakeHotel: HotelIdOnly = { hotelId: 'h1'};
+    mockedHotel.find.mockReturnValue({
+      select: mockSelect,
+    } as any);
 
-    // mock findOne pour renvoyer un hôtel
-    mockedHotel.findOne.mockResolvedValue(fakeHotel as any);
+    const result = await HotelService.getAllHotelId();
 
-    const result = await HotelService.getHotelById('h1');
-
-    expect(mockedHotel.findOne).toHaveBeenCalledWith({ hotelId: 'h1' });
-    expect(result).toEqual(fakeHotel);
-  })
+    expect(result).toBeNull();
+  });
 });

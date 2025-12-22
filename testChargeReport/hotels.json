@@ -1,0 +1,78 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.0": 200,
+      "vusers.created": 200,
+      "http.requests": 200,
+      "plugins.metrics-by-endpoint./api/v3/hotels.errors.ETIMEDOUT": 200,
+      "errors.ETIMEDOUT": 200,
+      "vusers.failed": 200
+    },
+    "rates": {
+      "http.request_rate": 15
+    },
+    "firstCounterAt": 1766418985383,
+    "lastCounterAt": 1766419005764,
+    "firstMetricAt": 1766418985383,
+    "lastMetricAt": 1766419005764,
+    "period": 1766419000000,
+    "summaries": {},
+    "histograms": {}
+  },
+  "intermediate": [
+    {
+      "counters": {
+        "vusers.created_by_name.0": 87,
+        "vusers.created": 87,
+        "http.requests": 87
+      },
+      "rates": {
+        "http.request_rate": 20
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1766418985383,
+      "lastCounterAt": 1766418989946,
+      "firstMetricAt": 1766418985383,
+      "lastMetricAt": 1766418989946,
+      "period": "1766418980000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.0": 113,
+        "vusers.created": 113,
+        "http.requests": 113,
+        "plugins.metrics-by-endpoint./api/v3/hotels.errors.ETIMEDOUT": 87,
+        "errors.ETIMEDOUT": 87,
+        "vusers.failed": 87
+      },
+      "rates": {
+        "http.request_rate": 20
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1766418990006,
+      "lastCounterAt": 1766418999959,
+      "firstMetricAt": 1766418990006,
+      "lastMetricAt": 1766418999959,
+      "period": "1766418990000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "plugins.metrics-by-endpoint./api/v3/hotels.errors.ETIMEDOUT": 113,
+        "errors.ETIMEDOUT": 113,
+        "vusers.failed": 113
+      },
+      "rates": {},
+      "firstCounterAt": 1766419000020,
+      "lastCounterAt": 1766419005764,
+      "firstMetricAt": 1766419000020,
+      "lastMetricAt": 1766419005764,
+      "period": "1766419000000",
+      "summaries": {},
+      "histograms": {}
+    }
+  ]
+}

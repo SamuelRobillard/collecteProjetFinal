@@ -1,0 +1,78 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.0": 200,
+      "vusers.created": 200,
+      "http.requests": 200,
+      "plugins.metrics-by-endpoint./api/v3/hotelsLocationByCity.errors.ETIMEDOUT": 200,
+      "errors.ETIMEDOUT": 200,
+      "vusers.failed": 200
+    },
+    "rates": {
+      "http.request_rate": 15
+    },
+    "firstCounterAt": 1766419033959,
+    "lastCounterAt": 1766419054352,
+    "firstMetricAt": 1766419033959,
+    "lastMetricAt": 1766419054352,
+    "period": 1766419050000,
+    "summaries": {},
+    "histograms": {}
+  },
+  "intermediate": [
+    {
+      "counters": {
+        "vusers.created_by_name.0": 115,
+        "vusers.created": 115,
+        "http.requests": 115
+      },
+      "rates": {
+        "http.request_rate": 20
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1766419033959,
+      "lastCounterAt": 1766419039960,
+      "firstMetricAt": 1766419033959,
+      "lastMetricAt": 1766419039960,
+      "period": "1766419030000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "vusers.created_by_name.0": 85,
+        "vusers.created": 85,
+        "http.requests": 85,
+        "plugins.metrics-by-endpoint./api/v3/hotelsLocationByCity.errors.ETIMEDOUT": 115,
+        "errors.ETIMEDOUT": 115,
+        "vusers.failed": 115
+      },
+      "rates": {
+        "http.request_rate": 20
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1766419040021,
+      "lastCounterAt": 1766419049973,
+      "firstMetricAt": 1766419040021,
+      "lastMetricAt": 1766419049973,
+      "period": "1766419040000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "plugins.metrics-by-endpoint./api/v3/hotelsLocationByCity.errors.ETIMEDOUT": 85,
+        "errors.ETIMEDOUT": 85,
+        "vusers.failed": 85
+      },
+      "rates": {},
+      "firstCounterAt": 1766419050034,
+      "lastCounterAt": 1766419054352,
+      "firstMetricAt": 1766419050034,
+      "lastMetricAt": 1766419054352,
+      "period": "1766419050000",
+      "summaries": {},
+      "histograms": {}
+    }
+  ]
+}
