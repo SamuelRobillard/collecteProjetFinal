@@ -52,7 +52,7 @@ app.use(cors(corsOptions));
 
 app.use(
   "/docs",
-  swaggerUi.serve,
+  swaggerUi.serveFiles(swaggerDocument3),
   swaggerUi.setup(swaggerDocument3, {
     explorer: true,
     customSiteTitle: "Collecte Projet Final – API Docs"
