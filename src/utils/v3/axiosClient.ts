@@ -22,15 +22,15 @@ api.interceptors.response.use(
   (res) => res,
   async (error) => {
     if (error.response?.status === 401) {
-      console.log("⚠️ Token expiré, rafraîchissement…");
+      console.log(" Token expiré, rafraîchissement");
 
       try {
-        await refreshToken(); // Rafraîchissement du token
-        const newToken = await getToken(); // Récupération du nouveau token
+        await refreshToken(); 
+        const newToken = await getToken(); 
 
-        // Mise à jour de la requête avec le nouveau token
+        
         error.config.headers.Authorization = `Bearer ${newToken}`;
-        return api.request(error.config); // Réessaye l'appel avec le nouveau token
+        return api.request(error.config); 
       } catch (e) {
         console.error("Erreur lors du rafraîchissement du token : ", e);
         return Promise.reject(error);
