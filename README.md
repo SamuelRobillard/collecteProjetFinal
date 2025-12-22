@@ -83,6 +83,20 @@ Simplement importer la collection et run la collection en entière.
 
 2 recherche de films et series par leur titre et d'autre champ.
 
+## Configuration
+
+L'application utilise `config` pour une configuration multi-environnement.
+
+### Configuration Files
+
+situé dans le dossier  `/config`:
+- `default.json` - Configuration de base
+- `development.json` - Environnement de developpement
+- `test.json` - Environnement de test
+- `production.json` - Paramètres de production
+- `custom-environment-variables.json` - Variables d'environnement
+
+
 
 
 
