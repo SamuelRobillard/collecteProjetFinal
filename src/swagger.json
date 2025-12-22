@@ -288,19 +288,6 @@
         }
       }
     },
-    "/hotelQuality": {
-      "get": {
-        "summary": "Lister qualités hôtel",
-        "tags": [
-          "Hotels"
-        ],
-        "responses": {
-          "200": {
-            "description": "Liste des qualités"
-          }
-        }
-      }
-    },
     "/booking": {
       "get": {
         "summary": "Réservations utilisateur",
@@ -398,7 +385,7 @@
   "components": {
     "securitySchemes": {
       "bearerAuth": {
-        "type": "http",
+        "type": "https",
         "scheme": "bearer",
         "bearerFormat": "JWT"
       }
