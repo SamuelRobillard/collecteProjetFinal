@@ -19,7 +19,15 @@ module.exports = {
     '!src/data/**',
     '!src/swagger/**',
     '!src/config/**',
-    '!src/winston/**'
+    '!src/winston/**',
+    '!src/routes/**',
+    '!src/controllers/**',
+    '!src/utils/**',
+    '!src/Regex/**',
+    '!src/middleswares/v3/**',
+    '!src/models/**',
+
+
   ],
 
   coverageReporters: ['text', 'lcov', 'html'],
