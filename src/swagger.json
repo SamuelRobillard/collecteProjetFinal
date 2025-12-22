@@ -272,7 +272,18 @@
           "200": {
             "description": "Résultats par ville"
           }
-        }
+        },
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Identifiant de l'hôtel associé à la réservation"
+          }
+        ]
       }
     },
     "/hotelsbestratioprice": {
@@ -285,7 +296,18 @@
           "200": {
             "description": "Classement"
           }
-        }
+        },
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Identifiant de l'hôtel associé à la réservation"
+          }
+        ]
       }
     },
     "/booking": {
