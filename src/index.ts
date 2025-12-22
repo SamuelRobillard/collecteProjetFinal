@@ -33,22 +33,22 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-const corsOptions: CorsOptions = {
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
+// const corsOptions: CorsOptions = {
+//   origin: (origin, callback) => {
+//     if (!origin) return callback(null, true);
 
-    if (config.allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
-};
+//     if (config.allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+//   credentials: true
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.use(
   "/docs",
@@ -70,10 +70,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello, TypeScript with Express! Connexion sécurisée.");
 });
 
-app.use((err: any, req: Request, res: Response, next: any) => {
-  winError.error(err);
-  res.status(500).json({ message: "Erreur interne du serveur" });
-});
+
 
 if (config.env === "production" && !isRender) {
   const options = {
