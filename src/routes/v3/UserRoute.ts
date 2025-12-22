@@ -37,7 +37,7 @@ router.get('/me', authMiddleware, async (req: AuthRequest, res: Response) => {
     }
 
     // Retourne le user sans le mot de passe
-    const userNoPass : DTOUser = new DTOUser(user.id, user.firstName, user.lastName, user.email);
+    const userNoPass : DTOUser = new DTOUser(user.id, user.firstName, user.lastName, user.email, user.role);
     res.status(200).json(userNoPass);
   } catch (error) {
     console.error('Erreur dans /me :', error);
@@ -45,4 +45,7 @@ router.get('/me', authMiddleware, async (req: AuthRequest, res: Response) => {
   }
 });
 
+
+router.delete("/user", authMiddleware, userController.deleteUserToken);
+router.delete("/admin/user/:id", authMiddleware,adminMiddleware,  userController.adminDeleteUser);
 export default router;

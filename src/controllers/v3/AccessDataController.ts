@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { BookingService } from "../../services/v3/BookingService";
 import { AccessDataService } from "../../services/v3/AccessDataService";
 import { CityCodeNameService } from "../../services/v3/CityCodeNameService";
@@ -65,18 +65,19 @@ export class AccessDataController {
   }
 
 
-    public async getAllHotelDto(req: Request, res: Response): Promise<Response> {
+    public async getAllHotelDto(req: Request, res: Response, next : NextFunction): Promise<Response> {
     try {
                 const dataInfo = await AccessDataService.getAllHotelDTo();
                 return res.status(201).json(dataInfo);
         
     } catch (error: unknown) {
+      next(error)
       return res.status(400).json({ message: "probleme getDataInfoByCity" });
     }
   }
 
 
- public async getTop10HotelPriceRatioByCity(req: Request, res: Response): Promise<Response> {
+ public async getTop10HotelPriceRatioByCity(req: Request, res: Response, next : NextFunction): Promise<Response> {
     try {
 
         const {city}  = req.query;
@@ -89,6 +90,8 @@ export class AccessDataController {
         }
         return res.status(404)
     } catch (error: unknown) {
+      
+      next(error)
       return res.status(400).json({ message: "probleme getBestHotelPriceRatioByCity" });
     }
   }

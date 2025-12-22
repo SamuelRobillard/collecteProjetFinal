@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { Types } from "mongoose";
 import { HttpError } from "../../utils/HttpError";
 import User from "../../models/v3/UserModel";
+import { error } from "console";
 
 export class UserService {
   public static async createUser(
@@ -84,5 +85,21 @@ export class UserService {
         "Erreur lors de la récupération des utilisateurs: " + error
       );
     }
+  }
+
+  public static async deleteUser(id: string): Promise<IUser | null> {
+   try {
+        
+   
+      
+           const user = await User.findOneAndDelete({ 
+            _id: id,
+            
+           });
+           return user;
+         
+       } catch (error) {
+         throw new Error("Unable to delete user : " + error);
+       }
   }
 }

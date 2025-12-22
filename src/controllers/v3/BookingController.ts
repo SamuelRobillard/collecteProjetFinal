@@ -50,13 +50,18 @@ export class BookingController {
 
 
   public async deleteBookingByHotelId(req:AuthRequest,res:Response):Promise<void>{
+    console.log("deleteBookingByHotelId controller")
     const {hotelId} = req.query;
     const userId = req.user.id
     console.log(userId)
+    console.log(hotelId)
     try {     
-        if(hotelId != undefined)
-        await BookingService.deleteBookingByHotelIdAndUserId(hotelId as string, userId)
-        res.status(204).send(); 
+        if(hotelId != undefined){
+          await BookingService.deleteBookingByHotelIdAndUserId(hotelId as string, userId)
+          
+          res.status(204).send(); 
+        }
+       
        }
      catch (error:unknown) {
        res.status(404).json({
