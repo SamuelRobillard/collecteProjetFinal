@@ -40,6 +40,28 @@ describe('BookingService.createBooking', () => {
       nbRooms: 2
     });
   });
+
+  it('should return a message if booking already exists', async () => {
+    const existingBooking = {
+      hotelId: 'hotel67',
+      userId: '1022020',
+      dateStart: '12/20/2025',
+      dateEnd: '01/15/2026',
+      nbRooms: 2
+    };
+
+    mockedBooking.findOne.mockResolvedValue(existingBooking as any);
+
+    const result = await BookingService.createBooking(
+      'hotel67',
+      '1022020',
+      '12/20/2025',
+      '01/15/2026',
+      2
+    );
+
+    expect(result.message).toBe('Booking already exists for this user in this hotel.');
+  });
 });
 
 type BookingOnly = { hotelId: string; userId: string; dateStart: string; dateEnd: string; nbRooms: number };
@@ -59,7 +81,45 @@ describe('BookingService.getBookingsByUserId', () => {
 
     expect(mockedBooking.find).toHaveBeenCalledWith({ userId: '1022020' });
     expect(result).toEqual(fakeBookings);
-  })
+  });
+
+  it('should return null if no bookings found', async () => {
+    mockedBooking.find.mockResolvedValue(null);
+
+    const result = await BookingService.getBookingsByUserId('1022020');
+
+    expect(mockedBooking.find).toHaveBeenCalledWith({ userId: '1022020' });
+    expect(result).toBeNull();
+  });
+});
+
+
+describe('BookingService.getBookingsIdByUserId', () => {
+  it('should return the hotel IDs of bookings for a user', async () => {
+    const fakeHotels = [
+      { hotelId: 'hotel1', userId: '1022020' },
+      { hotelId: 'hotel2', userId: '1022020' }
+    ];
+
+    mockedBooking.find.mockReturnValue({
+      select: jest.fn().mockResolvedValue(fakeHotels)
+    } as any);
+
+    const result = await BookingService.getBookingsIdByUserId('1022020');
+
+    expect(mockedBooking.find).toHaveBeenCalledWith({ userId: '1022020' });
+    expect(result).toEqual(['hotel1', 'hotel2']);
+  });
+
+  it('should return null if no bookings found', async () => {
+    mockedBooking.find.mockReturnValue({
+      select: jest.fn().mockResolvedValue(null)
+    } as any);
+
+    const result = await BookingService.getBookingsIdByUserId('1022020');
+
+    expect(result).toBeNull();
+  });
 });
 
 
@@ -81,7 +141,18 @@ describe('BookingService.deleteBookingByHotelId', () => {
     expect(mockedBooking.findOne).toHaveBeenCalledWith({ hotelId: 'hotel2' });
     expect(mockedBooking.findOneAndDelete).toHaveBeenCalledWith({ hotelId: 'hotel2' });
     expect(result).toEqual(fakeBooking);
-  })
+  });
+
+  it('should not delete if booking does not exist', async () => {
+    jest.clearAllMocks();
+    mockedBooking.findOne.mockResolvedValue(null);
+
+    const result = await BookingService.deleteBookingByHotelId('hotel2');
+
+    expect(mockedBooking.findOne).toHaveBeenCalledWith({ hotelId: 'hotel2' });
+    expect(mockedBooking.findOneAndDelete).not.toHaveBeenCalled();
+    expect(result).toBeUndefined();
+  });
 });
 
 
@@ -95,4 +166,35 @@ describe('BookingService.deleteBookingByHotelIdAndUserId', () => {
     expect(mockedBooking.findOneAndDelete).toHaveBeenCalledWith({ hotelId: 'hotel5',userId:'1022020' });
     expect(result).toEqual(fakeBooking);
   })
+});
+
+
+describe('BookingService.calculateDaysBetweenDates', () => {
+  it('should calculate the number of days between two dates', () => {
+    const dateStart = '12/20/2025';
+    const dateEnd = '01/15/2026';
+    
+    const result = BookingService.calculateDaysBetweenDates(dateStart, dateEnd);
+    
+    const expectedDays = 26;
+    expect(result).toBeCloseTo(expectedDays, 0);
+  });
+
+  it('should return 0 days if dates are the same', () => {
+    const dateStart = '12/20/2025';
+    const dateEnd = '12/20/2025';
+    
+    const result = BookingService.calculateDaysBetweenDates(dateStart, dateEnd);
+    
+    expect(result).toBe(0);
+  });
+
+  it('should handle negative values when end date is before start date', () => {
+    const dateStart = '01/15/2026';
+    const dateEnd = '12/20/2025';
+    
+    const result = BookingService.calculateDaysBetweenDates(dateStart, dateEnd);
+    
+    expect(result).toBeLessThan(0);
+  });
 });
