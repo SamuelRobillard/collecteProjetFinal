@@ -1,6 +1,4 @@
-# Hotel API
- 
-
+# Dodôtel
 ---
 
 ## 🛠️ Installation & Utilisation
@@ -47,37 +45,36 @@ collecte/
 ├── generateKeyCert.js       # Script de génération des certificats
 └── README.md        
 ```
+---
 
-
+## Commandes utiles
+### Rentrer dans le dossier du projet
+```bash
 cd collecte
-
+```
+### Installer les dépendances
+```bash
 npm install
+```
+### Lancer l'environnemnent de developpement
+```bash
+npm run dev 
+```
+### Lancer les testes
+```bash
+npm test
+```
 
 
-
-
-dev: npm run dev 
-
-
-
-test: npm test
-
-
-
-
-
-ps : préférence bash,
-si autre terminal, verifier que openssl est installé
+ps : Par préférence, utiliser bash. Sinon, verifier que openssl est installé.
+---
 ---
 
-
----
 ## 🛠️ Postman
 
 Simplement importer la collection et run la collection en entière.
 
 ---
-
 
 ## fonctionnalitées
 - Lister les hôtels disponibles par ville. 
@@ -92,7 +89,9 @@ Simplement importer la collection et run la collection en entière.
 
 - Voir les informations de son propre compte. 
 
-- Visualisation des graphes. 
+- Visualisation des graphes.
+
+---
 
 ## Configuration
 
