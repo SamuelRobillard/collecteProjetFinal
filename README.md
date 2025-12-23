@@ -57,11 +57,12 @@ npm install
 
 
 dev: npm run dev 
-(utilisé celui ci pour postman)
 
-test: npm run test-env
 
-prod: npm run start
+
+test: npm test
+
+
 
 
 
@@ -79,9 +80,19 @@ Simplement importer la collection et run la collection en entière.
 
 
 ## fonctionnalitées
-1 creation et connexion a des comptes utilisateur
+- Lister les hôtels disponibles par ville. 
 
-2 recherche de films et series par leur titre et d'autre champ.
+- Filtrer et trier selon des champs sélectionnés par l’utilisateur. 
+
+- Ajouter et supprimer des réservations en choisissant le nombre de adultes, enfants et chambres. 
+
+- Création et authentification de compte utilisateur. 
+
+- Suppression d’utilisateur pour un compte administrateur. 
+
+- Voir les informations de son propre compte. 
+
+- Visualisation des graphes. 
 
 ## Configuration
 
