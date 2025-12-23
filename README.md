@@ -16,7 +16,7 @@ collecte/
 └── src/
     ├── config/
     │       # mettre le /env ici
-                        puis -> develpment.env
+                        puis -> development.env
                         ou      production.env
                         ou      test.env
                                    
