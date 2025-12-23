@@ -1,8 +1,9 @@
 # Dodôtel
----
 
-## 🛠️ Installation & Utilisation
+Une API RESTFUL de consultation et réservation d'hôtels. Fait avec Node.js, Express, TypeScript, et MongoDB.
 
+
+## Installation & Utilisation
 
 
 git clone https://github.com/SamuelRobillard/collecteProjetFinal
@@ -45,7 +46,15 @@ collecte/
 ├── generateKeyCert.js       # Script de génération des certificats
 └── README.md        
 ```
----
+
+## Prérequis
+
+- **Node.js**: v16.x ou +
+- **npm**: v8.x ou +
+- **MongoDB**: v5.x ou + (local ou Atlas)
+- **TypeScript**: v4.x ou +
+
+
 
 ## Commandes utiles
 ### Rentrer dans le dossier du projet
@@ -67,14 +76,13 @@ npm test
 
 
 ps : Par préférence, utiliser bash. Sinon, verifier que openssl est installé.
----
----
 
-## 🛠️ Postman
+
+## Postman
 
 Simplement importer la collection et run la collection en entière.
 
----
+
 
 ## fonctionnalitées
 - Lister les hôtels disponibles par ville. 
@@ -91,7 +99,6 @@ Simplement importer la collection et run la collection en entière.
 
 - Visualisation des graphes.
 
----
 
 ## Configuration
 
@@ -106,7 +113,10 @@ situé dans le dossier  `/config`:
 - `production.json` - Paramètres de production
 - `custom-environment-variables.json` - Variables d'environnement
 
-
+## Lien vers le Frontend mobile
+```bash
+https://github.com/2391650/mobile1
+```
 
 
 
